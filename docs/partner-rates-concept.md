@@ -14,10 +14,10 @@ one dashboard. CTAs: "Start free" → the source's shipping signup URL ·
 
 ## Design
 
-- Pitch block up top (eyebrow, heading, sub, dual CTAs), then three full-width
-  stat rows: numbers at `clamp(3.5rem, 10vw, 8rem)` with tight tracking and
-  `tabular-nums` (no jitter while counting), labels right-aligned, hairline
-  dividers top and bottom. Stacked with the number first below `sm`.
+- Pitch block up top (eyebrow, heading, sub, dual CTAs), then the three stats
+  side by side in a hairline grid (stacked below `lg`): numbers at
+  `clamp(2.75rem, 6vw, 5rem)` with tight tracking and `tabular-nums` (no
+  jitter while counting), labels underneath.
 
 ## Motion
 

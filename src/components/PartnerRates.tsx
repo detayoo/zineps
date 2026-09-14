@@ -58,12 +58,10 @@ function StatRow({
       initial={reduce ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
-      className="grid grid-cols-12 items-end gap-4 border-t border-border py-10 last:border-b md:py-8"
+      className="flex flex-col gap-2 bg-background p-8"
     >
-      <dt className="order-2 col-span-4 pb-3 text-right text-[16px] text-muted-foreground sm:col-span-full sm:pb-0 sm:text-left">
-        {label}
-      </dt>
-      <dd className="order-1 col-span-8 text-[clamp(3.5rem,10vw,8rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground sm:col-span-full">
+      <dt className="order-2 text-[15px] text-muted-foreground">{label}</dt>
+      <dd className="order-1 text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground">
         {format(value)}
       </dd>
     </motion.div>
@@ -126,7 +124,7 @@ export function PartnerRates() {
           </div>
         </motion.div>
 
-        <dl className="mt-16">
+        <dl className="mt-16 grid grid-cols-3 gap-px overflow-hidden rounded border border-border bg-border lg:grid-cols-1">
           {stats.map((stat) => (
             <StatRow
               key={stat.label}
