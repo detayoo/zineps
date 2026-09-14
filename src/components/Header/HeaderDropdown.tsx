@@ -92,7 +92,7 @@ export function HeaderDropdown({ item }: { item: NavItem }) {
             id={panelId}
             {...(reduceMotion ? reducedDropdownMotion : dropdownMotion)}
             transition={dropdownTransition}
-            className="absolute left-1/2 top-full z-50 w-[19rem] origin-top -translate-x-1/2 pt-2"
+            className="absolute left-0 top-full z-50 w-max min-w-[15rem] max-w-[22rem] origin-top pt-2"
           >
             <ul className="flex flex-col gap-2">
               {item.children?.map((child) => (
