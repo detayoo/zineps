@@ -121,7 +121,7 @@ export function Footer() {
                       variants={letter}
                       className="inline-block"
                     >
-                      {char === " " ? " " : char}
+                      {char === " " ? " " : char}
                     </motion.span>
                   ))}
                   {!reduce && (
