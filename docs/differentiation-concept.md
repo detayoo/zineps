@@ -16,6 +16,10 @@ the source.
 - Numbered `01–04` cells in accent, title + body; hover tints `accent-soft/50`.
 - Uneven 12-col rhythm (`7 / 5 / 5 / 7`, stacking below `md`) so the grid
   doesn't read as four identical boxes.
+- Each card carries its numeral as a giant ghost background (`10rem`,
+  `foreground/7%`, cropped bottom-right, deepening on hover) — ink like the
+  header wordmark, never the accent. Content sits above it; the ghost is
+  `aria-hidden`.
 
 ## Motion
 

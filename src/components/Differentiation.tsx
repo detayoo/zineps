@@ -68,17 +68,22 @@ export function Differentiation() {
           {items.map((item, index) => (
             <li
               key={item.title}
-              className={`${["col-span-7", "col-span-5", "col-span-5", "col-span-7"][index] ?? "col-span-6"} rounded border border-border bg-background p-8 transition-colors duration-200 hover:bg-accent-soft/50 md:col-span-full`}
+              className={`${["col-span-7", "col-span-5", "col-span-5", "col-span-7"][index] ?? "col-span-6"} group relative overflow-hidden rounded border border-border bg-background p-8 transition-colors duration-200 hover:bg-accent-soft/50 md:col-span-full`}
             >
-              <p className="text-[13px] font-semibold tabular-nums text-accent-strong">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-7 -right-3 select-none text-[10rem] font-extrabold leading-none tracking-[-0.04em] text-foreground/[0.07] transition-colors duration-300 group-hover:text-foreground/[0.12]"
+              >
                 {String(index + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-3 text-[19px] font-semibold text-foreground">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-[14.5px] leading-relaxed text-muted-foreground">
-                {item.body}
-              </p>
+              </span>
+              <div className="relative">
+                <h3 className="text-[19px] font-semibold text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-[14.5px] leading-relaxed text-muted-foreground">
+                  {item.body}
+                </p>
+              </div>
             </li>
           ))}
         </motion.ul>
