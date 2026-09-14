@@ -14,14 +14,17 @@ one dashboard. CTAs: "Start free" → the source's shipping signup URL ·
 
 ## Design
 
-- 12-col split (7/5, stacking below `lg`); stat rows divide by hairlines with
-  the value left and the label right, valid `dt`-before-`dd` order kept via
-  flex ordering.
+- Pitch block up top (eyebrow, heading, sub, dual CTAs), then three full-width
+  stat rows: numbers at `clamp(3.5rem, 10vw, 8rem)` with tight tracking and
+  `tabular-nums` (no jitter while counting), labels right-aligned, hairline
+  dividers top and bottom. Stacked with the number first below `sm`.
 
 ## Motion
 
-Scroll reveals only: `opacity 0 → 1`, `y 24 → 0`, `600ms`, house ease, stats
-trailing by `100ms`. Reduced motion renders static.
+Scroll reveals only: `opacity 0 → 1`, `y 24–32 → 0`, `600ms`, house ease.
+Each stat counts `0 → target` over `2s` on the house ease the first time it
+enters view (`1,000` formatted with the locale separator). Reduced motion
+renders final values statically.
 
 ## Accessibility
 

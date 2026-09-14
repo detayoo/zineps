@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { animate, motion, useReducedMotion } from "framer-motion";
 
 /** House ease — the same curve the rest of the page uses. */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -10,15 +11,68 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
 const stats = [
-  { value: "+20", label: "shipping partners" },
-  { value: "+200", label: "destination countries" },
-  { value: "+1,000", label: "shipping methods" },
+  {
+    target: 20,
+    format: (value: number) => `+${value}`,
+    label: "shipping partners",
+  },
+  {
+    target: 200,
+    format: (value: number) => `+${value}`,
+    label: "destination countries",
+  },
+  {
+    target: 1000,
+    format: (value: number) => `+${value.toLocaleString("en-US")}`,
+    label: "shipping methods",
+  },
 ] as const;
 
+function StatRow({
+  target,
+  format,
+  label,
+}: {
+  target: number;
+  format: (value: number) => string;
+  label: string;
+}) {
+  const reduce = useReducedMotion();
+  const [started, setStarted] = useState(false);
+  const [value, setValue] = useState(reduce ? target : 0);
+
+  useEffect(() => {
+    if (!started || reduce) return;
+    const controls = animate(0, target, {
+      duration: 2,
+      ease: EASE,
+      onUpdate: (latest) => setValue(Math.round(latest)),
+    });
+    return () => controls.stop();
+  }, [started, reduce, target]);
+
+  return (
+    <motion.div
+      onViewportEnter={() => setStarted(true)}
+      viewport={{ once: true, margin: "-80px" }}
+      initial={reduce ? false : { opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: EASE }}
+      className="grid grid-cols-12 items-end gap-4 border-t border-border py-10 last:border-b md:py-8"
+    >
+      <dt className="order-2 col-span-4 pb-3 text-right text-[16px] text-muted-foreground sm:col-span-full sm:pb-0 sm:text-left">
+        {label}
+      </dt>
+      <dd className="order-1 col-span-8 text-[clamp(3.5rem,10vw,8rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground sm:col-span-full">
+        {format(value)}
+      </dd>
+    </motion.div>
+  );
+}
+
 /**
- * Partner shipping rates — "their buying power becomes yours", from the
- * reference's partner-rates block. Pitch and CTAs on the left, the three
- * stats ruled on the right.
+ * Partner shipping rates — "their buying power becomes yours". Pitch and
+ * CTAs up top, then three huge count-up stats ruled across the full width.
  */
 export function PartnerRates() {
   const reduce = useReducedMotion();
@@ -29,13 +83,13 @@ export function PartnerRates() {
       aria-labelledby="partner-rates-heading"
       className="border-t border-border bg-background"
     >
-      <div className="mx-auto grid w-full max-w-[1200px] grid-cols-12 gap-10 px-6 py-24 md:py-20">
+      <div className="mx-auto w-full max-w-[1200px] px-6 py-24 md:py-20">
         <motion.div
           initial={initial}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="col-span-7 lg:col-span-full"
+          className="max-w-[680px]"
         >
           <p className="inline-flex items-center gap-2 rounded border border-border bg-accent-soft px-3 py-1.5 text-[13px] font-semibold text-accent-strong">
             <span
@@ -72,27 +126,16 @@ export function PartnerRates() {
           </div>
         </motion.div>
 
-        <motion.dl
-          initial={initial}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
-          className="col-span-5 self-center border-t border-border lg:col-span-full"
-        >
+        <dl className="mt-16">
           {stats.map((stat) => (
-            <div
+            <StatRow
               key={stat.label}
-              className="flex items-baseline justify-between gap-6 border-b border-border py-5"
-            >
-              <dt className="order-2 text-right text-[14px] text-muted-foreground">
-                {stat.label}
-              </dt>
-              <dd className="order-1 text-[34px] font-semibold tracking-[-0.01em] text-foreground">
-                {stat.value}
-              </dd>
-            </div>
+              target={stat.target}
+              format={stat.format}
+              label={stat.label}
+            />
           ))}
-        </motion.dl>
+        </dl>
       </div>
     </section>
   );
