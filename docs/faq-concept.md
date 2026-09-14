@@ -19,7 +19,8 @@ the right.
   in the x-ta `Callout` manner: a `2px` accent edge, a faint mint fill, zero
   radius (`rounded-none` — the one place sharp is the point). Question row on
   top with tabular numerals and a plus that rotates `45°` open; answer
-  unfolding inside the same box.
+  unfolding inside the same box. Closed items sit on the page background and
+  only take the mint fill once opened — the accent edge is always on.
 - First item open by default so the section never reads empty.
 
 ## Motion
