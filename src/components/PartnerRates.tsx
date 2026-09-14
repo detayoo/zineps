@@ -78,8 +78,6 @@ function StatRow({
       transition={{ duration: 0.6, ease: EASE }}
       onMouseEnter={() => setRoll(true)}
       onMouseLeave={() => setRoll(false)}
-      onFocus={() => setRoll(true)}
-      onBlur={() => setRoll(false)}
       className="flex flex-col gap-2 bg-background p-8"
     >
       <dt className="order-2 text-[15px] text-muted-foreground">{label}</dt>
