@@ -40,6 +40,8 @@ function StatRow({
   const reduce = useReducedMotion();
   const [started, setStarted] = useState(false);
   const [value, setValue] = useState(reduce ? target : 0);
+  const [rolling, setRolling] = useState(false);
+  const [tick, setTick] = useState(0);
 
   useEffect(() => {
     if (!started || reduce) return;
@@ -51,6 +53,22 @@ function StatRow({
     return () => controls.stop();
   }, [started, reduce, target]);
 
+  useEffect(() => {
+    if (!rolling || reduce) return;
+    const id = setInterval(() => setTick((t) => t + 1), 70);
+    return () => clearInterval(id);
+  }, [rolling, reduce]);
+
+  const shown = format(value).replace(/\d/g, (digit) =>
+    rolling && !reduce ? String((Number(digit) + tick) % 10) : digit,
+  );
+
+  const setRoll = (next: boolean) => {
+    if (reduce) return;
+    setTick(0);
+    setRolling(next);
+  };
+
   return (
     <motion.div
       onViewportEnter={() => setStarted(true)}
@@ -58,11 +76,15 @@ function StatRow({
       initial={reduce ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
+      onMouseEnter={() => setRoll(true)}
+      onMouseLeave={() => setRoll(false)}
+      onFocus={() => setRoll(true)}
+      onBlur={() => setRoll(false)}
       className="flex flex-col gap-2 bg-background p-8"
     >
       <dt className="order-2 text-[15px] text-muted-foreground">{label}</dt>
       <dd className="order-1 text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground">
-        {format(value)}
+        {shown}
       </dd>
     </motion.div>
   );

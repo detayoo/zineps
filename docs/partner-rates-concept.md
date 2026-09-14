@@ -23,8 +23,10 @@ one dashboard. CTAs: "Start free" → the source's shipping signup URL ·
 
 Scroll reveals only: `opacity 0 → 1`, `y 24–32 → 0`, `600ms`, house ease.
 Each stat counts `0 → target` over `2s` on the house ease the first time it
-enters view (`1,000` formatted with the locale separator). Reduced motion
-renders final values statically.
+enters view (`1,000` formatted with the locale separator). Hovering or
+focusing a stat rolls its digits forward odometer-style until pointer or
+focus leaves, then it snaps home. Reduced motion renders final values
+statically with no roll.
 
 ## Accessibility
 
