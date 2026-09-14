@@ -72,7 +72,7 @@ export function Differentiation() {
             >
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-7 -right-3 select-none text-[10rem] font-extrabold leading-none tracking-[-0.04em] text-foreground/[0.07] transition-colors duration-300 group-hover:text-foreground/[0.12]"
+                className="pointer-events-none absolute -bottom-7 -right-3 origin-bottom-right select-none text-[10rem] font-extrabold leading-none tracking-[-0.04em] text-foreground/[0.07] transition-all duration-300 group-hover:text-foreground/[0.12] motion-safe:group-hover:-rotate-6"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>
