@@ -16,8 +16,12 @@ Magento, Correos, Bpost, Temu, DB Schenker, CCV Shop, SnelStart, Exact.
 
 - Hairline grid via the `gap-px` + `bg-border` trick inside a rounded,
   overflow-hidden frame — dividers without nesting borders.
-- 6 columns → 4 below `lg` → 2 below `sm`. Cells hover mint (`accent-soft`
-  fill, `accent-ink` text).
+- 6 columns → 4 below `lg` → 2 below `sm`.
+- Each cell shows the platform name at rest; on hover the name lifts out and
+  the real brand logo (fetched from the reference site into `public/logos`)
+  settles in — `opacity` + `translate` + `scale`, so entering and leaving
+  animate symmetrically. Logos are decorative (`alt=""`, lazy); the name
+  stays the accessible content, and touch/keyboard users simply see names.
 
 ## Motion
 

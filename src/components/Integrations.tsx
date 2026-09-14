@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
 import { ArrowRightIcon } from "@/components/icons";
@@ -12,29 +13,31 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
 const platforms = [
-  "Shopify",
-  "WooCommerce",
-  "Bol.com",
-  "Amazon",
-  "PostNL",
-  "DHL",
-  "DPD",
-  "UPS",
-  "FedEx",
-  "GLS",
-  "Magento",
-  "Correos",
-  "Bpost",
-  "Temu",
-  "DB Schenker",
-  "CCV Shop",
-  "SnelStart",
-  "Exact",
+  { name: "Shopify", logo: "/logos/hero-shopify.svg" },
+  { name: "WooCommerce", logo: "/logos/hero-woo.svg" },
+  { name: "Bol.com", logo: "/logos/hero-bol.svg" },
+  { name: "Amazon", logo: "/logos/hero-amazon.svg" },
+  { name: "PostNL", logo: "/logos/hero-postnl.svg" },
+  { name: "DHL", logo: "/logos/hero-dhl.svg" },
+  { name: "DPD", logo: "/logos/hero-dpd.svg" },
+  { name: "UPS", logo: "/logos/hero-ups.svg" },
+  { name: "FedEx", logo: "/logos/hero-fedex.svg" },
+  { name: "GLS", logo: "/logos/hero-gls.svg" },
+  { name: "Magento", logo: "/logos/hero-magento.svg" },
+  { name: "Correos", logo: "/logos/hero-correos.svg" },
+  { name: "Bpost", logo: "/logos/hero-bpost.svg" },
+  { name: "Temu", logo: "/logos/hero-temu.svg" },
+  { name: "DB Schenker", logo: "/logos/db-schenker-logo.svg" },
+  { name: "CCV Shop", logo: "/logos/ccv-shop-logo.svg" },
+  { name: "SnelStart", logo: "/logos/snelstart-logo.svg" },
+  { name: "Exact", logo: "/logos/exact-logo.svg" },
 ] as const;
 
 /**
- * Integrations — "100+ integrations" with a ruled wall of platform names,
- * from the reference's integration marquee. Text set in place of logo assets.
+ * Integrations — "100+ integrations" over a ruled wall of platforms. Each
+ * cell shows the name at rest; on hover the name lifts out and the real
+ * brand logo settles in. The swap is pure CSS transition, so entering and
+ * leaving animate symmetrically — and instant under reduced motion.
  */
 export function Integrations() {
   const reduce = useReducedMotion();
@@ -85,10 +88,24 @@ export function Integrations() {
         >
           {platforms.map((platform) => (
             <li
-              key={platform}
-              className="flex h-[72px] items-center justify-center bg-background px-4 text-center text-[15px] font-semibold text-muted-foreground transition-colors duration-200 hover:bg-accent-soft hover:text-accent-ink"
+              key={platform.name}
+              className="group relative flex h-[104px] items-center justify-center overflow-hidden bg-background px-4"
             >
-              {platform}
+              <span className="text-center text-[15px] font-semibold text-muted-foreground transition-all duration-300 motion-safe:group-hover:-translate-y-2 motion-safe:group-hover:opacity-0">
+                {platform.name}
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center px-6 opacity-0 transition-all duration-300 motion-safe:translate-y-2 motion-safe:scale-95 motion-safe:group-hover:translate-y-0 motion-safe:group-hover:scale-100 motion-safe:group-hover:opacity-100">
+                <span className="relative block h-10 w-full">
+                  <Image
+                    src={platform.logo}
+                    alt=""
+                    fill
+                    sizes="(max-width: 640px) 40vw, (max-width: 1180px) 22vw, 15vw"
+                    loading="lazy"
+                    className="object-contain"
+                  />
+                </span>
+              </span>
             </li>
           ))}
         </motion.ul>
