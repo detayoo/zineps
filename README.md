@@ -1,6 +1,6 @@
 # Zineps — Website Revamp
 
-A revamp of <https://www.zineps.com/>. Currently: header + hero + footer.
+A revamp of <https://www.zineps.com/>. Currently: header + hero + final CTA + footer.
 UI copy is English-first for now.
 
 ## Stack
@@ -27,6 +27,7 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`
   states, motion, responsive rules, a11y and the file map.
 - `docs/hero-concept.md` — the hero concept, copy decisions, motion and a11y.
 - `docs/footer-concept.md` — the footer pattern (from ramblings) and copy.
+- `docs/final-cta-concept.md` — the closing CTA section and Linear styling.
 
 ## Layout
 
@@ -36,6 +37,7 @@ src/
 ├── components/
 │   ├── Header/              the header (see below)
 │   ├── Hero.tsx             the homepage hero
+│   ├── FinalCta.tsx         the closing call to action
 │   ├── Footer.tsx           the footer (closing CTA + links + wordmark)
 │   ├── ZinepsLogo.tsx
 │   └── icons.tsx
