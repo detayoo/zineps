@@ -22,8 +22,9 @@ at the bottom. Built to sit under “The Masthead” on the same wide rail.
 - **Promise block** — eyebrow tag, H1 kept close to the source, compressed
   subcopy, verb-first CTAs (`Start shipping`, `Explore the partner platform`),
   and the no-contract microcopy answering the top FAQ.
-- **Legend** — four non-interactive phase labels that highlight with scroll
-  progress. Decorative status, not controls.
+- **Legend** — four non-interactive phase labels pinned above a slim ink
+  foreground. Inactive labels use light text on the dark band; the active phase
+  is a white pill. Decorative status, not controls.
 
 ## Motion (scroll-driven, then still)
 

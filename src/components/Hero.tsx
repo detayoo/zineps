@@ -46,7 +46,7 @@ export function Hero() {
   const skyDrift = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const farHills = useTransform(scrollYProgress, [0, 1], ["0%", "-6%"]);
   const midHills = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
-  const nearGround = useTransform(scrollYProgress, [0, 1], ["0%", "-24%"]);
+  const nearGround = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
   const copyRise = useTransform(scrollYProgress, [0, 0.5], ["0%", "-28%"]);
   const copyFade = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
   const routeDraw = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
@@ -129,10 +129,10 @@ export function Hero() {
             style={reduce ? undefined : { y: nearGround }}
             viewBox="0 0 1440 240"
             preserveAspectRatio="none"
-            className="absolute inset-x-0 bottom-0 h-[22svh] w-full"
+            className="absolute inset-x-0 bottom-0 h-[16svh] w-full"
           >
             <path
-              d="M-40 150 C220 90 360 170 580 130 C800 90 940 170 1160 130 C1300 108 1400 140 1480 125 L1480 240 L-40 240 Z"
+              d="M-40 170 C220 120 360 190 580 155 C800 120 940 190 1160 155 C1300 135 1400 160 1480 150 L1480 240 L-40 240 Z"
               fill="rgb(var(--foreground))"
             />
           </motion.svg>
@@ -218,8 +218,8 @@ export function Hero() {
                 key={label}
                 className={`rounded border px-3 py-2 text-center text-[13px] font-semibold transition-colors duration-200 ${
                   index === activePhase
-                    ? "border-accent-strong bg-background text-foreground"
-                    : "border-transparent text-muted-foreground"
+                    ? "border-accent bg-background text-foreground"
+                    : "border-transparent text-background/65"
                 }`}
               >
                 {label}
