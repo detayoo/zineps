@@ -14,14 +14,15 @@ import { EASE } from "../motion";
 import { useHeader } from "../useHeader";
 
 const navLinkClass =
-  "rounded-pill px-3.5 py-2 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
+  "flex h-full items-center rounded px-3.5 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
 
 const ctaClass =
-  "rounded-pill bg-accent px-5 py-2.5 text-[14px] font-semibold text-accent-ink transition-all duration-200 hover:bg-accent/90 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
+  "flex h-9 items-center rounded bg-accent px-4 text-[14px] font-semibold text-accent-ink transition-all duration-200 hover:bg-accent/90 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
 
 /**
  * Variant one — "The Capsule".
- * A floating, centered pill: logo left, primary nav center, language + CTA right.
+ * A floating, centered bar: logo left, primary nav center, language + CTA right.
+ * Nav rows are full-height so hover fills the bar edge to edge.
  * See docs/header-concept.md for the full concept.
  */
 export function HeaderVariantOne() {
@@ -36,7 +37,7 @@ export function HeaderVariantOne() {
         className="fixed inset-x-0 top-3 z-[100] flex justify-center px-4 sm:px-3"
       >
         <div
-          className={`flex w-full max-w-[1200px] items-center justify-between gap-6 rounded-pill border py-2 pl-5 pr-2 transition-[background-color,border-color] duration-300 ${
+          className={`flex h-14 w-full max-w-[1200px] items-center justify-between gap-4 rounded border pl-4 pr-1.5 transition-[background-color,border-color] duration-300 ${
             scrolled
               ? "border-border bg-background/85 backdrop-blur-xl"
               : "border-transparent bg-background/60 backdrop-blur-md"
@@ -45,14 +46,14 @@ export function HeaderVariantOne() {
           <Link
             href="/"
             aria-label="Zineps home"
-            className="shrink-0 rounded-pill focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
+            className="flex h-full shrink-0 items-center rounded px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40"
           >
             <ZinepsLogo className="h-[22px] w-auto text-foreground" />
           </Link>
 
           <nav
             aria-label="Main navigation"
-            className="flex items-center gap-1 lg:hidden"
+            className="flex h-full items-center gap-0.5 lg:hidden"
           >
             {primaryNav.map((item) =>
               item.children ? (
@@ -65,7 +66,7 @@ export function HeaderVariantOne() {
             )}
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex h-full items-center gap-2">
             <div className="flex items-center gap-2 lg:hidden">
               <LanguageSwitcher />
               <Link href={authLinks.signIn} className={ctaClass}>
@@ -77,7 +78,7 @@ export function HeaderVariantOne() {
               type="button"
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
-              className="hidden rounded-full p-2 text-foreground transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40 lg:inline-flex"
+              className="hidden h-9 w-9 items-center justify-center rounded text-foreground transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40 lg:inline-flex"
             >
               <MenuIcon className="h-6 w-6" />
             </button>

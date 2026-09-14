@@ -16,6 +16,20 @@ const config: Config = {
       sm: { max: "640px" },
       xs: { max: "420px" },
     },
+    // One radius for everything: 4px. Replaces Tailwind's default scale, so
+    // `rounded`, `rounded-full`, `rounded-2xl` and friends all resolve to 4px.
+    borderRadius: {
+      none: "0px",
+      sm: "4px",
+      DEFAULT: "4px",
+      md: "4px",
+      lg: "4px",
+      xl: "4px",
+      "2xl": "4px",
+      "3xl": "4px",
+      full: "4px",
+      pill: "4px",
+    },
     extend: {
       colors: {
         background: "rgb(var(--background) / <alpha-value>)",
@@ -34,9 +48,6 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-manrope)", "system-ui", "sans-serif"],
-      },
-      borderRadius: {
-        pill: "9999px",
       },
       transitionTimingFunction: {
         // The house ease — fast start, soft settle. Used across the header.

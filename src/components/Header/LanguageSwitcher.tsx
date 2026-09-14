@@ -39,7 +39,7 @@ export function LanguageSwitcher() {
         aria-controls={panelId}
         aria-label="Choose language"
         onClick={() => setOpen((value) => !value)}
-        className="flex items-center gap-1.5 rounded-pill border border-border px-3 py-1.5 text-[13px] font-medium text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
+        className="flex h-9 items-center gap-1.5 rounded border border-border px-3 text-[13px] font-medium text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40"
       >
         <span aria-hidden="true">{current.flag}</span>
         <span>{current.code}</span>
@@ -56,9 +56,9 @@ export function LanguageSwitcher() {
             id={panelId}
             {...dropdownMotion}
             transition={dropdownTransition}
-            className="absolute right-0 top-full z-50 w-52 pt-3"
+            className="absolute right-0 top-full z-50 w-52 pt-2"
           >
-            <ul className="overflow-hidden rounded-2xl border border-border bg-background/95 p-1.5 backdrop-blur-xl">
+            <ul className="overflow-hidden rounded bg-background shadow-[0_16px_40px_-20px_rgba(11,18,16,0.28)]">
               {languages.map((language) => {
                 const active = language.code === current.code;
                 return (
@@ -69,7 +69,7 @@ export function LanguageSwitcher() {
                         setCurrent(language);
                         setOpen(false);
                       }}
-                      className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-[13.5px] transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40 ${
+                      className={`flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left text-[13.5px] transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40 ${
                         active
                           ? "font-semibold text-foreground"
                           : "text-muted-foreground"

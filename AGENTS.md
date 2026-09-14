@@ -20,17 +20,22 @@ writing copy. The design language is defined by the tokens in
 1. **No hardcoded colors.** Use the tokens (`bg-background`, `text-muted-foreground`,
    `bg-accent`, `border-border`, ...). Raw brand values live only in
    `globals.css`. Never `#fff`, `white`, `black`, or arbitrary hex in components.
-2. **No shadows.** Elevation is a border (`border-border`), never `shadow-*`.
-3. **Desktop-first breakpoints.** Every breakpoint except `2xl` is a max-width
+2. **Radius is 4px.** The Tailwind `borderRadius` scale is overridden in
+   `tailwind.config.ts`, so every `rounded-*` utility resolves to 4px. Do not
+   reintroduce pills or large radii.
+3. **Flush hover surfaces.** Dropdown panels have no padding and no border — rows
+   run edge to edge. Borderless floating panels may use a soft shadow for
+   separation; this is the *only* sanctioned shadow.
+4. **Desktop-first breakpoints.** Every breakpoint except `2xl` is a max-width
    override. Write base (desktop) styles first, then override downward.
-4. **Variant architecture for sections.** Anything that differs structurally per
+5. **Variant architecture for sections.** Anything that differs structurally per
    theme gets `ComponentName/index.tsx` + `variants/ComponentNameVariantN.tsx`.
    Ternaries are for small style/visibility tweaks only. The `variant` union is
    always `"one" | "two" | "three" | "four"`; the resolver falls back to `one`.
-5. **Interactive primitives own their own state.** Dropdowns, the language
+6. **Interactive primitives own their own state.** Dropdowns, the language
    picker and the mobile overlay are self-contained components. `useHeader` holds
    only page-level state (scroll, overlay visibility, scroll lock).
-6. **Accessibility.** Disclosure pattern (`aria-expanded` + `aria-controls`) for
+7. **Accessibility.** Disclosure pattern (`aria-expanded` + `aria-controls`) for
    dropdowns, `role="dialog" aria-modal="true"` + focus trap for the overlay,
    `focus-visible` rings on everything interactive, `Escape` closes.
 

@@ -1,16 +1,16 @@
 import Link from "next/link";
 
 const secondaryCta =
-  "rounded-pill border border-border px-6 py-3 text-[15px] font-medium text-foreground transition-colors duration-200 hover:bg-muted";
+  "rounded border border-border px-6 py-3 text-[15px] font-medium text-foreground transition-colors duration-200 hover:bg-muted";
 const primaryCta =
-  "rounded-pill bg-accent px-6 py-3 text-[15px] font-semibold text-accent-ink transition-all duration-200 hover:bg-accent/90 active:scale-[0.98]";
+  "rounded bg-accent px-6 py-3 text-[15px] font-semibold text-accent-ink transition-all duration-200 hover:bg-accent/90 active:scale-[0.98]";
 
 export default function Home() {
   return (
     <main className="mx-auto max-w-[1200px] px-6">
       {/* Hero — the header's floating capsule sits over this. */}
       <section className="flex flex-col items-center pb-24 pt-[168px] text-center sm:pt-[132px]">
-        <span className="mb-6 inline-flex items-center gap-2 rounded-pill border border-border bg-accent-soft px-4 py-1.5 text-[13px] font-medium text-accent-strong">
+        <span className="mb-6 inline-flex items-center gap-2 rounded border border-border bg-accent-soft px-4 py-1.5 text-[13px] font-medium text-accent-strong">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
           The intelligent layer for logistics
         </span>
@@ -38,8 +38,8 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="mt-16 w-full rounded-[28px] border border-border bg-muted/60 p-3">
-          <div className="flex h-[320px] items-center justify-center rounded-[20px] border border-border bg-background text-[13px] uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="mt-16 w-full rounded border border-border bg-muted/60 p-3">
+          <div className="flex h-[320px] items-center justify-center rounded border border-border bg-background text-[13px] uppercase tracking-[0.2em] text-muted-foreground">
             Zineps dashboard
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function Home() {
         ].map((title) => (
           <div
             key={title}
-            className="rounded-3xl border border-border bg-muted/40 p-8"
+            className="rounded border border-border bg-muted/40 p-8"
           >
             <h2 className="text-[20px] font-medium">{title}</h2>
             <p className="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">

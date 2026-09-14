@@ -85,7 +85,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               type="button"
               onClick={onClose}
               aria-label="Close menu"
-              className="rounded-full p-2 text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
+              className="rounded p-2 text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
             >
               <CloseIcon className="h-6 w-6" />
             </button>
@@ -110,7 +110,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                             value === item.label ? null : item.label,
                           )
                         }
-                        className="flex w-full items-center justify-between rounded-2xl px-3 py-3.5 text-left text-[22px] font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
+                        className="flex w-full items-center justify-between rounded px-3 py-3.5 text-left text-[22px] font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
                       >
                         {item.label}
                         <ChevronDownIcon
@@ -133,11 +133,11 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                                 <Link
                                   href={child.href}
                                   onClick={onClose}
-                                  className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-[15px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                                  className="flex items-center gap-2 rounded px-4 py-2.5 text-[15px] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                                 >
                                   {child.label}
                                   {child.badge && (
-                                    <span className="rounded-pill bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-strong">
+                                    <span className="rounded bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-strong">
                                       {child.badge}
                                     </span>
                                   )}
@@ -152,7 +152,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                     <Link
                       href={item.href}
                       onClick={onClose}
-                      className="block rounded-2xl px-3 py-3.5 text-[22px] font-medium text-foreground transition-colors hover:bg-muted"
+                      className="block rounded px-3 py-3.5 text-[22px] font-medium text-foreground transition-colors hover:bg-muted"
                     >
                       {item.label}
                     </Link>
@@ -169,7 +169,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 <button
                   key={language.code}
                   type="button"
-                  className="flex items-center gap-2 rounded-pill border border-border px-3.5 py-2 text-[13px] font-medium text-foreground/80 transition-colors hover:bg-muted"
+                  className="flex items-center gap-2 rounded border border-border px-3.5 py-2 text-[13px] font-medium text-foreground/80 transition-colors hover:bg-muted"
                 >
                   <span aria-hidden="true">{language.flag}</span>
                   {language.label}
@@ -181,7 +181,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               <Link
                 href={authLinks.signIn}
                 onClick={onClose}
-                className="flex w-full items-center justify-center rounded-pill bg-accent px-6 py-3.5 text-[15px] font-semibold text-accent-ink transition-colors hover:bg-accent/90"
+                className="flex w-full items-center justify-center rounded bg-accent px-6 py-3.5 text-[15px] font-semibold text-accent-ink transition-colors hover:bg-accent/90"
               >
                 Sign up
               </Link>

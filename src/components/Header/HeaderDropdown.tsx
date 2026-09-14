@@ -10,11 +10,12 @@ import type { NavItem } from "@/lib/nav";
 import { dropdownMotion, dropdownTransition } from "./motion";
 
 const triggerClass =
-  "flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
+  "flex h-full items-center gap-1.5 rounded px-3.5 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
 
 /**
  * A single nav group ("Products", "Knowledge Base").
  * Opens on hover and on click/keyboard, closes on Escape, blur-out or outside click.
+ * The panel has no padding or border, so hovered rows run edge to edge.
  */
 export function HeaderDropdown({ item }: { item: NavItem }) {
   const [open, setOpen] = useState(false);
@@ -55,7 +56,7 @@ export function HeaderDropdown({ item }: { item: NavItem }) {
   return (
     <div
       ref={rootRef}
-      className="relative"
+      className="relative h-full"
       onMouseEnter={openNow}
       onMouseLeave={closeSoon}
     >
@@ -80,20 +81,20 @@ export function HeaderDropdown({ item }: { item: NavItem }) {
             id={panelId}
             {...dropdownMotion}
             transition={dropdownTransition}
-            className="absolute left-1/2 top-full z-50 w-[22rem] -translate-x-1/2 pt-3"
+            className="absolute left-1/2 top-full z-50 w-[22rem] -translate-x-1/2 pt-2"
           >
-            <ul className="overflow-hidden rounded-2xl border border-border bg-background/95 p-1.5 backdrop-blur-xl">
+            <ul className="overflow-hidden rounded bg-background shadow-[0_16px_40px_-20px_rgba(11,18,16,0.28)]">
               {item.children?.map((child) => (
                 <li key={child.label}>
                   <Link
                     href={child.href}
                     onClick={() => setOpen(false)}
-                    className="group/item block rounded-xl px-3.5 py-2.5 transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
+                    className="block w-full px-4 py-3 transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40"
                   >
                     <span className="flex items-center gap-2 text-[14px] font-medium text-foreground">
                       {child.label}
                       {child.badge && (
-                        <span className="rounded-pill bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-strong">
+                        <span className="rounded bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-strong">
                           {child.badge}
                         </span>
                       )}
