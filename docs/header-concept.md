@@ -58,9 +58,11 @@ pills; each pill carries its own `border-border`. The panel **unrolls from the
 top edge** — `origin-top` with `scaleY 0 → 1` over `200ms` on the house ease — so
 it unfolds out of the trigger instead of popping in.
 
-On hover a pill swaps its border and label to the brand accent (`accent-strong`)
-and tints to `accent-soft`, with a `1.02` scale. The chevron rotates `180°` over
-`300ms`.
+On hover a pill fills **solid** with `accent-strong`, its label and description
+flip to `text-background`, and it scales `1.02`. That is deliberately loud — the
+white-on-white pills otherwise blend into the page. At rest each pill border is
+`foreground/15` (stronger than the `border` hairline) so the stack reads as a
+menu. The chevron rotates `180°` over `300ms`.
 
 **No shadows anywhere.** The pill border does the separation work, which is why
 the panel needs no background and no elevation.
@@ -86,7 +88,7 @@ Improvements over the original:
 | **Scrolled** | `scrollY > 12` | hairline `border-border` fades in, `bg-background/85` + `backdrop-blur-xl` |
 | **Nav hover** | pointer over a nav row | row fills the full bar height, `bg-muted` |
 | **Dropdown open** | hover / click / focus | panel unrolls from the top (`scaleY 0 → 1`); pills fade in |
-| **Pill hover** | pointer over a pill | border + label → accent, `accent-soft` tint, `1.02` scale |
+| **Pill hover** | pointer over a pill | solid `accent-strong` fill, text → `background`, `1.02` scale |
 | **Mobile open** | hamburger | full-screen overlay, items stagger in |
 
 ---

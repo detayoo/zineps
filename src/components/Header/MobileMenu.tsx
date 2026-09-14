@@ -74,7 +74,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.28, ease: EASE }}
-          className="fixed inset-0 z-[200] flex flex-col bg-background lg:hidden"
+          className="fixed inset-0 z-[200] hidden flex-col bg-background lg:flex"
         >
           <div className="flex items-center justify-between px-5 py-4">
             <Link href="/" onClick={onClose} aria-label="Zineps home">

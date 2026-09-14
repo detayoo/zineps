@@ -100,18 +100,18 @@ export function HeaderDropdown({ item }: { item: NavItem }) {
                   <Link
                     href={child.href}
                     onClick={() => setOpen(false)}
-                    className="group/item block w-full rounded border border-border bg-background px-4 py-2.5 transition-all duration-200 hover:scale-[1.02] hover:border-accent-strong hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40"
+                    className="group/item block w-full rounded border border-foreground/15 bg-background px-4 py-2.5 transition-all duration-200 hover:scale-[1.02] hover:border-accent-strong hover:bg-accent-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40"
                   >
-                    <span className="flex items-center gap-2 text-[14px] font-medium text-foreground transition-colors duration-200 group-hover/item:text-accent-strong">
+                    <span className="flex items-center gap-2 text-[14px] font-medium text-foreground transition-colors duration-200 group-hover/item:text-background">
                       {child.label}
                       {child.badge && (
-                        <span className="rounded bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-strong">
+                        <span className="rounded bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-strong transition-colors duration-200 group-hover/item:bg-background/20 group-hover/item:text-background">
                           {child.badge}
                         </span>
                       )}
                     </span>
                     {child.description && (
-                      <span className="mt-0.5 block text-[12.5px] leading-snug text-muted-foreground">
+                      <span className="mt-0.5 block text-[12.5px] leading-snug text-muted-foreground transition-colors duration-200 group-hover/item:text-background/75">
                         {child.description}
                       </span>
                     )}

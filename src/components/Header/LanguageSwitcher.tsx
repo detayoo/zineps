@@ -74,13 +74,13 @@ export function LanguageSwitcher() {
                         setCurrent(language);
                         setOpen(false);
                       }}
-                      className={`group/item flex w-full items-center gap-2.5 rounded border bg-background px-3.5 py-2.5 text-left text-[13.5px] transition-all duration-200 hover:scale-[1.02] hover:border-accent-strong hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40 ${
-                        active ? "border-accent" : "border-border"
+                      className={`group/item flex w-full items-center gap-2.5 rounded border bg-background px-3.5 py-2.5 text-left text-[13.5px] transition-all duration-200 hover:scale-[1.02] hover:border-accent-strong hover:bg-accent-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40 ${
+                        active ? "border-accent-strong" : "border-foreground/15"
                       }`}
                     >
                       <span aria-hidden="true">{language.flag}</span>
                       <span
-                        className={`flex-1 transition-colors duration-200 group-hover/item:text-accent-strong ${
+                        className={`flex-1 transition-colors duration-200 group-hover/item:text-background ${
                           active
                             ? "font-semibold text-foreground"
                             : "text-muted-foreground"
@@ -88,7 +88,7 @@ export function LanguageSwitcher() {
                       >
                         {language.label}
                       </span>
-                      <span className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                      <span className="text-[11px] uppercase tracking-wide text-muted-foreground transition-colors duration-200 group-hover/item:text-background/75">
                         {language.code}
                       </span>
                     </button>
