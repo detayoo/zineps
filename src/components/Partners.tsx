@@ -120,7 +120,7 @@ export function Partners() {
                   >
                     <span
                       aria-hidden="true"
-                      className="h-2 w-2 shrink-0 rounded-sm bg-accent-strong"
+                      className="h-2 w-2 shrink-0 rounded-sm bg-foreground"
                     />
                     <span className="flex-1 text-[15.5px] font-medium text-foreground">
                       {capability.title}

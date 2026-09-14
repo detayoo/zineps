@@ -172,7 +172,7 @@ export function Footer() {
                   <li key={point} className="flex items-start gap-3">
                     <span
                       aria-hidden="true"
-                      className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-sm bg-accent-strong"
+                      className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-sm bg-foreground"
                     />
                     <p className="text-[14.5px] leading-relaxed text-foreground/90">
                       {point}
@@ -205,7 +205,7 @@ export function Footer() {
                   <li key={point} className="flex items-start gap-3">
                     <span
                       aria-hidden="true"
-                      className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-sm bg-accent-strong"
+                      className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-sm bg-foreground"
                     />
                     <p className="text-[14.5px] leading-relaxed text-foreground/90">
                       {point}
