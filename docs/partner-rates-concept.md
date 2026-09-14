@@ -22,11 +22,9 @@ one dashboard. CTAs: "Start free" → the source's shipping signup URL ·
 ## Motion
 
 Scroll reveals only: `opacity 0 → 1`, `y 32 → 0`, `600ms`, house ease.
-Numbers render at final value — no count-up. Hovering a stat spins each
-digit through exactly one odometer revolution (`0 → 10` over `700ms`,
-linear — constant velocity, so no value lingers before landing home) and
-lands home; leaving mid-spin snaps back. Reduced motion
-renders final values statically with no roll.
+Numbers always show their true value — no counting, no rolling. Hovering a
+stat lifts the number, wipes in a mint rule beneath it, and warms the label
+to accent (motion-gated). Reduced motion keeps the color change only.
 
 ## Accessibility
 

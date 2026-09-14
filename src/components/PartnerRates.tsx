@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { animate, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /** House ease — the same curve the rest of the page uses. */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -38,29 +37,6 @@ function StatRow({
   label: string;
 }) {
   const reduce = useReducedMotion();
-  const [spin, setSpin] = useState(0);
-  const controlsRef = useRef<ReturnType<typeof animate> | null>(null);
-
-  useEffect(() => () => controlsRef.current?.stop(), []);
-
-  const startRoll = () => {
-    if (reduce) return;
-    controlsRef.current?.stop();
-    controlsRef.current = animate(0, 10, {
-      duration: 0.7,
-      ease: "linear",
-      onUpdate: (latest) => setSpin(latest),
-      onComplete: () => setSpin(0),
-    });
-  };
-  const stopRoll = () => {
-    controlsRef.current?.stop();
-    setSpin(0);
-  };
-
-  const shown = format(target).replace(/\d/g, (digit) =>
-    String((Number(digit) + Math.floor(spin)) % 10),
-  );
 
   return (
     <motion.div
@@ -68,14 +44,18 @@ function StatRow({
       initial={reduce ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
-      onMouseEnter={startRoll}
-      onMouseLeave={stopRoll}
-      className="flex flex-col gap-2 bg-background p-8"
+      className="group flex flex-col gap-2 bg-background p-8"
     >
-      <dt className="order-2 text-[15px] text-muted-foreground">{label}</dt>
-      <dd className="order-1 text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground">
-        {shown}
+      <dt className="order-3 text-[15px] text-muted-foreground transition-colors duration-200 group-hover:text-accent-strong">
+        {label}
+      </dt>
+      <dd className="order-1 text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground transition-transform duration-300 motion-safe:group-hover:-translate-y-1">
+        {format(target)}
       </dd>
+      <span
+        aria-hidden="true"
+        className="order-2 mt-1 h-[3px] w-16 origin-left scale-x-0 bg-accent-strong transition-transform duration-300 motion-safe:group-hover:scale-x-100"
+      />
     </motion.div>
   );
 }
