@@ -15,8 +15,9 @@ logistics service providers · freight forwarders · 3PLs.
 ## Design
 
 - 12-col split (5/7, stacking below `lg`); eyebrow tag matches the hero's.
-- Checklist rows divided by hairlines with mint square markers; chips echo the
-  header's language pill at text scale.
+- Checklist rows expand on hover *and* on click/keyboard (`open ∪ hover`),
+  each revealing a one-line explanation with a plus that rotates open —
+  disclosure-wired (`aria-expanded` + `aria-controls`) like the FAQ.
 
 ## Motion
 

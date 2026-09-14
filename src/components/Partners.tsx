@@ -1,7 +1,10 @@
 "use client";
 
+import { useId, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+
+import { PlusIcon } from "@/components/icons";
 
 /** House ease — the same curve the rest of the page uses. */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -10,11 +13,26 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
 const capabilities = [
-  "Publish rates and terms",
-  "Manage contracts, customer groups, and margins",
-  "Invoice automatically per customer or shipment",
-  "Onboard your existing merchants onto Zineps",
-  "Keep the commercial relationship",
+  {
+    title: "Publish rates and terms",
+    body: "Put your full rate card and conditions online once — merchants always see current pricing, and you never resend a spreadsheet.",
+  },
+  {
+    title: "Manage contracts, customer groups, and margins",
+    body: "Group customers, set margins per lane, and keep every contract versioned in one place instead of across inboxes.",
+  },
+  {
+    title: "Invoice automatically per customer or shipment",
+    body: "Invoices generate themselves per customer or per shipment — no manual billing runs at month end.",
+  },
+  {
+    title: "Onboard your existing merchants onto Zineps",
+    body: "Invite the merchants you already serve. They ship inside Zineps while they stay your customers.",
+  },
+  {
+    title: "Keep the commercial relationship",
+    body: "You stay the face to your customer — Zineps stays the infrastructure underneath.",
+  },
 ] as const;
 
 const builtFor = [
@@ -31,6 +49,9 @@ const builtFor = [
 export function Partners() {
   const reduce = useReducedMotion();
   const initial = reduce ? false : { opacity: 0, y: 24 };
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const panelId = useId();
 
   return (
     <section
@@ -79,18 +100,56 @@ export function Partners() {
           className="col-span-7 lg:col-span-full"
         >
           <ul className="border-t border-border">
-            {capabilities.map((capability) => (
-              <li
-                key={capability}
-                className="flex items-center gap-4 border-b border-border py-4"
-              >
-                <span
-                  aria-hidden="true"
-                  className="h-2 w-2 shrink-0 rounded-sm bg-accent-strong"
-                />
-                <p className="text-[15.5px] text-foreground">{capability}</p>
-              </li>
-            ))}
+            {capabilities.map((capability, index) => {
+              const expanded = openIndex === index || hoverIndex === index;
+              return (
+                <li
+                  key={capability.title}
+                  className="border-b border-border"
+                  onMouseEnter={() => setHoverIndex(index)}
+                  onMouseLeave={() => setHoverIndex(null)}
+                >
+                  <button
+                    type="button"
+                    aria-expanded={expanded}
+                    aria-controls={`${panelId}-${index}`}
+                    onClick={() =>
+                      setOpenIndex(openIndex === index ? null : index)
+                    }
+                    className={`flex w-full items-center gap-4 py-4 text-left transition-colors duration-200 hover:bg-accent-soft/60 ${focusRing} rounded`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="h-2 w-2 shrink-0 rounded-sm bg-accent-strong"
+                    />
+                    <span className="flex-1 text-[15.5px] font-medium text-foreground">
+                      {capability.title}
+                    </span>
+                    <PlusIcon
+                      className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 ${
+                        expanded ? "rotate-45 text-accent-strong" : ""
+                      }`}
+                    />
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {expanded && (
+                      <motion.div
+                        id={`${panelId}-${index}`}
+                        initial={{ height: reduce ? "auto" : 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.28, ease: EASE }}
+                        className="overflow-hidden"
+                      >
+                        <p className="max-w-[58ch] pb-5 pl-6 pr-4 text-[14.5px] leading-relaxed text-muted-foreground">
+                          {capability.body}
+                        </p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </li>
+              );
+            })}
           </ul>
           <div className="mt-6 flex flex-wrap items-center gap-2">
             <p className="mr-1 text-[13px] font-semibold text-muted-foreground">
