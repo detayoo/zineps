@@ -25,7 +25,7 @@ const iconButtonClass =
  *
  * A full-bleed, ruled bar (not a floating pill): logo · nav · language · CTA,
  * divided by vertical hairlines, with the CTA as a full-height accent block.
- * On scroll the bottom hairline appears and the bar firms up.
+ * The bottom hairline is always on; on scroll the bar firms up.
  * See docs/header-concept.md for the full concept.
  */
 export function Header() {
@@ -38,10 +38,10 @@ export function Header() {
         initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: EASE }}
-        className={`fixed inset-x-0 top-0 z-[100] border-b transition-colors duration-300 ${
+        className={`fixed inset-x-0 top-0 z-[100] border-b border-border transition-colors duration-300 ${
           scrolled
-            ? "border-border bg-background/85 backdrop-blur-xl"
-            : "border-transparent bg-background/50 backdrop-blur-sm"
+            ? "bg-background/85 backdrop-blur-xl"
+            : "bg-background/50 backdrop-blur-sm"
         }`}
       >
         <div className="mx-auto flex h-16 w-full max-w-[1440px] items-center">

@@ -44,6 +44,7 @@ it's structurally nothing like the reference.
 ```
 
 - **Bar** — fixed, full-bleed, `h-16`, `max-w-[1440px]` inner rail. No radius.
+  The bottom hairline is always visible; scrolling only firms up the fill/blur.
 - **Logo** — zineps wordmark + mint orbit mark. Wordmark inherits `currentColor`;
   the mark stays mint.
 - **Nav** — left-aligned, ruled off from the logo by a `border-l`. Rows are
@@ -76,8 +77,8 @@ white-on-white pills otherwise blend into the page. At rest each pill border is
 
 | State | Trigger | Change |
 |-------|---------|--------|
-| **Resting** | top of page | translucent `bg-background/50` + `backdrop-blur-sm`, bottom border transparent |
-| **Scrolled** | `scrollY > 12` | bottom `border-border` fades in, `bg-background/85` + `backdrop-blur-xl` |
+| **Resting** | top of page | bottom `border-border` is already on; `bg-background/50` + `backdrop-blur-sm` |
+| **Scrolled** | `scrollY > 12` | same bottom border, fill firms to `bg-background/85` + `backdrop-blur-xl` |
 | **Nav hover** | pointer over a nav row | row fills the full bar height, `bg-muted` |
 | **Dropdown open** | hover / click / focus | panel unrolls from the top (`scaleY 0 → 1`); pills fade in |
 | **Pill hover** | pointer over a pill | solid `accent-strong` fill, text → `background`, `1.02` scale |
