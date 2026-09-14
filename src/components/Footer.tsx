@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { ZinepsLogo } from "@/components/ZinepsLogo";
+import { ArrowRightIcon } from "@/components/icons";
 import { authLinks } from "@/lib/nav";
 
 /** House ease — the same curve the header and hero use. */
@@ -154,19 +155,72 @@ export function Footer() {
             merchants along.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href={authLinks.signIn}
-              className={`inline-flex min-h-[44px] items-center rounded bg-accent px-6 text-[15px] font-semibold text-accent-ink transition-colors duration-200 hover:bg-accent-strong hover:text-background active:scale-[0.98] ${focusRing}`}
-            >
-              Start your trial
-            </Link>
-            <Link
-              href="/contact"
-              className={`inline-flex min-h-[44px] items-center rounded border border-border bg-background px-6 text-[15px] font-medium text-foreground transition-colors duration-200 hover:border-accent-strong hover:text-accent-strong ${focusRing}`}
-            >
-              Talk to sales
-            </Link>
+          <div className="mt-12 grid w-full grid-cols-2 gap-3 text-left lg:grid-cols-1">
+            <div className="rounded border border-border bg-background/80 p-8 backdrop-blur transition-colors duration-200 hover:border-accent-strong">
+              <p className="inline-flex items-center rounded border border-border bg-accent-soft px-3 py-1.5 text-[13px] font-semibold text-accent-strong">
+                For companies that ship
+              </p>
+              <h3 className="mt-5 text-[21px] font-semibold text-foreground">
+                Start shipping in minutes
+              </h3>
+              <ul className="mt-4 flex flex-col gap-2.5">
+                {[
+                  "Partner shipping rates included",
+                  "Your own contracts — or both",
+                  "Everything live in one dashboard",
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-sm bg-accent-strong"
+                    />
+                    <p className="text-[14.5px] leading-relaxed text-foreground/90">
+                      {point}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={authLinks.signIn}
+                className={`group mt-7 inline-flex items-center gap-1.5 text-[14.5px] font-medium text-accent-strong ${focusRing} rounded`}
+              >
+                Start shipping
+                <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
+
+            <div className="rounded border border-border bg-background/80 p-8 backdrop-blur transition-colors duration-200 hover:border-accent-strong">
+              <p className="inline-flex items-center rounded border border-border bg-accent-soft px-3 py-1.5 text-[13px] font-semibold text-accent-strong">
+                For logistics partners
+              </p>
+              <h3 className="mt-5 text-[21px] font-semibold text-foreground">
+                Bring your merchants with you
+              </h3>
+              <ul className="mt-4 flex flex-col gap-2.5">
+                {[
+                  "Digitize your rates and offering",
+                  "Serve the customers you already have",
+                  "Keep the commercial relationship",
+                ].map((point) => (
+                  <li key={point} className="flex items-start gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-sm bg-accent-strong"
+                    />
+                    <p className="text-[14.5px] leading-relaxed text-foreground/90">
+                      {point}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/logistics-operating-system"
+                className={`group mt-7 inline-flex items-center gap-1.5 text-[14.5px] font-medium text-accent-strong ${focusRing} rounded`}
+              >
+                Become a partner
+                <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </Link>
+            </div>
           </div>
           </div>
         </motion.div>

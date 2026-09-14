@@ -15,8 +15,12 @@ the page. All copy is the captured zineps reference, English-first.
   (`55ms` cadence, discrete pops). Subcopy, actions, all over a faint token grid (`border`
   hairlines at 48px, radially masked so it breathes out at the edges).
   Ramblings captures an email for a waitlist; zineps has no waitlist, so the
-  form becomes the reference's own CTAs: `Start your trial` (primary, mint)
-  and `Talk to sales` (secondary, bordered).
+  form becomes the reference's own "begin where you are" split below.
+- **Two-sided panels** — the reference's "begin where you are" split: one card
+  for companies that ship (start in minutes, partner rates, one dashboard →
+  Start shipping), one for logistics partners (digitize, serve, keep the
+  relationship → Become a partner). Glassy `background/80` cards over the
+  grid, borders warming to accent on hover.
 - **Ruled sections** — hairline dividers between CTA, link columns, and legal
   row, matching the masthead's ruled language.
 - **Link columns** — Products / Company / Contact, straight from the reference
