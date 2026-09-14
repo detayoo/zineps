@@ -299,12 +299,12 @@ export function Hero() {
           </motion.svg>
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center px-6 pt-24 text-center">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-start justify-center px-6 pt-24 text-left">
           <motion.div
             variants={container}
             initial="hidden"
             animate="show"
-            className="flex flex-col items-center"
+            className="flex w-full max-w-[660px] flex-col items-start"
           >
             <motion.p
               variants={rise}
@@ -339,7 +339,7 @@ export function Hero() {
 
             <motion.div
               variants={rise}
-              className="mt-9 flex flex-wrap items-center justify-center gap-3"
+              className="mt-9 flex flex-wrap items-center justify-start gap-3"
             >
               <Link
                 href={authLinks.signIn}

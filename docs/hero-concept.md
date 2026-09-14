@@ -26,9 +26,10 @@ Masthead” on the same wide rail.
   (`getPointAtLength`), heading from the tangent, wheel spin from travelled
   distance — so it can never detach from the line. Updates write straight to
   the DOM transform, no re-renders per scroll frame.
-- **Promise block** — eyebrow tag, H1 kept close to the source, compressed
-  subcopy, verb-first CTAs (`Start shipping`, `Explore the partner platform`),
-  and a microcopy line that doubles as the scroll cue.
+- **Promise block** — a left-aligned column (`max-w-[660px]`) holding the
+  eyebrow tag, H1 kept close to the source, compressed subcopy, verb-first CTAs
+  (`Start shipping`, `Explore the partner platform`), and the no-contract
+  microcopy. The right side stays open for the route scene.
 
 ## Motion (scroll-driven, then still)
 
