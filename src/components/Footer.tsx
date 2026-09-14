@@ -82,8 +82,24 @@ export function Footer() {
 
           <h2 className="mt-6 max-w-[720px] text-balance text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-foreground md:text-[32px] sm:text-[28px]">
             Software, network and intelligence,{" "}
-            <span className="box-decoration-clone bg-accent px-2 text-accent-ink">
-              start where you are.
+            <span className="relative inline-block -rotate-1">
+              <motion.span
+                aria-hidden="true"
+                initial={reduce ? false : { scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.45 }}
+                className="absolute bottom-0 left-1.5 right-0 top-1.5 origin-left bg-accent-strong"
+              />
+              <motion.span
+                initial={reduce ? false : { scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
+                className="relative inline-block origin-left bg-accent px-2 text-accent-ink box-decoration-clone"
+              >
+                start where you are.
+              </motion.span>
             </span>
           </h2>
 

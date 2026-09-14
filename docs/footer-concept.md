@@ -8,11 +8,13 @@ the page. All copy is the captured zineps reference, English-first.
 ## What was kept from the type
 
 - **Closing CTA block** — badge pill, big two-line headline with the second
-  line set as a mint marker block (`bg-accent`, ink text), subcopy, actions,
-  all over a faint token grid (`border` hairlines at 48px, radially masked so
-  it breathes out at the edges). Ramblings captures an email for a waitlist;
-  zineps has no waitlist, so the form becomes the reference's own CTAs:
-  `Start your trial` (primary, mint) and `Talk to sales` (secondary, bordered).
+  line as a styled marker: tilted `-1deg`, mint face over an offset deep-teal
+  backing, wiping in (`scaleX`, origin-left, staggered) when scrolled into
+  view. Subcopy, actions, all over a faint token grid (`border` hairlines at
+  48px, radially masked so it breathes out at the edges). Ramblings captures an
+  email for a waitlist; zineps has no waitlist, so the form becomes the
+  reference's own CTAs: `Start your trial` (primary, mint) and `Talk to sales`
+  (secondary, bordered).
 - **Ruled sections** — hairline dividers between CTA, link columns, and legal
   row, matching the masthead's ruled language.
 - **Link columns** — Products / Company / Contact, straight from the reference
