@@ -59,7 +59,7 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto w-full max-w-[1200px] px-6">
+      <div className="mx-auto w-full max-w-[1440px] px-6">
         <motion.div
           initial={initial}
           whileInView={reveal}
