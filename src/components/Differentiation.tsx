@@ -63,12 +63,12 @@ export function Differentiation() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
-          className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-1"
+          className="mt-12 grid grid-cols-12 gap-3"
         >
           {items.map((item, index) => (
             <li
               key={item.title}
-              className="rounded border border-border bg-background p-8 transition-colors duration-200 hover:bg-accent-soft/50"
+              className={`${["col-span-7", "col-span-5", "col-span-5", "col-span-7"][index] ?? "col-span-6"} rounded border border-border bg-background p-8 transition-colors duration-200 hover:bg-accent-soft/50 md:col-span-full`}
             >
               <p className="text-[13px] font-semibold tabular-nums text-accent-strong">
                 {String(index + 1).padStart(2, "0")}

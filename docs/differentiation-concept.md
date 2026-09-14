@@ -14,7 +14,8 @@ the source.
 ## Design
 
 - Numbered `01–04` cells in accent, title + body; hover tints `accent-soft/50`.
-- 2 columns collapsing to 1 below `sm`.
+- Uneven 12-col rhythm (`7 / 5 / 5 / 7`, stacking below `md`) so the grid
+  doesn't read as four identical boxes.
 
 ## Motion
 
