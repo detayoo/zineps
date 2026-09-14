@@ -48,7 +48,7 @@ function StatRow({
     controlsRef.current?.stop();
     controlsRef.current = animate(0, 10, {
       duration: 0.7,
-      ease: EASE,
+      ease: "linear",
       onUpdate: (latest) => setSpin(latest),
       onComplete: () => setSpin(0),
     });

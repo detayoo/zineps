@@ -23,8 +23,9 @@ one dashboard. CTAs: "Start free" → the source's shipping signup URL ·
 
 Scroll reveals only: `opacity 0 → 1`, `y 32 → 0`, `600ms`, house ease.
 Numbers render at final value — no count-up. Hovering a stat spins each
-digit through exactly one odometer revolution (`0 → 10` over `700ms` on the
-house ease) and lands home; leaving mid-spin snaps back. Reduced motion
+digit through exactly one odometer revolution (`0 → 10` over `700ms`,
+linear — constant velocity, so no value lingers before landing home) and
+lands home; leaving mid-spin snaps back. Reduced motion
 renders final values statically with no roll.
 
 ## Accessibility
