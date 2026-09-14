@@ -18,14 +18,16 @@ Masthead” on the same wide rail.
 - **Layers** — mint wash, soft far hills, teal mid hills, slim ink foreground.
   All fills use existing tokens (`background`, `accent`, `accent-strong`,
   `foreground`); no new colors, no shadows.
-- **Route** — one accent stroke draws from `pathLength 0 → 1` across scroll
-  progress `0.2 → 0.8`, with origin/destination nodes and city labels.
-- **The van** — a flat token-built box van: white cargo box with the wordmark
-  and a mint stripe, glazed cab with mirror and headlight, big spoked wheels.
-  It rides the route with position from the path geometry itself
+- **Route** — one accent stroke in its own clear band low in the frame (below
+  the copy, above the foreground), drawing from `pathLength 0 → 1` across
+  scroll progress `0.2 → 0.8`, with origin/destination nodes and city labels.
+- **The van** — a flat token-built box van that rides the route in a separate
+  overlay layer **above the copy** (`z-20`, `pointer-events-none`,
+  `aria-hidden`), so it can never be covered mid-journey; the line itself stays
+  behind the text. Position comes from the path geometry itself
   (`getPointAtLength`), heading from the tangent, wheel spin from travelled
-  distance — so it can never detach from the line. Updates write straight to
-  the DOM transform, no re-renders per scroll frame.
+  distance. Updates write straight to the DOM transform, no re-renders per
+  scroll frame.
 - **Promise block** — eyebrow tag, H1 kept close to the source, compressed
   subcopy, verb-first CTAs (`Start shipping`, `Explore the partner platform`),
   and a microcopy line that doubles as the scroll cue.

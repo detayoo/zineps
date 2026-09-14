@@ -156,11 +156,11 @@ export function Hero() {
             viewBox="0 0 1440 420"
             preserveAspectRatio="none"
             aria-hidden="true"
-            className="absolute inset-x-0 top-[30svh] h-[34svh] w-full"
+            className="absolute inset-x-0 top-[56svh] h-[26svh] w-full"
           >
             <motion.path
               ref={pathRef}
-              d="M-20 340 C 280 260, 520 370, 760 270 C 1000 170, 1220 250, 1460 190"
+              d="M-20 300 C 280 240, 520 330, 760 270 C 1000 210, 1220 280, 1460 230"
               fill="none"
               stroke="rgb(var(--accent-strong))"
               strokeWidth={3}
@@ -169,30 +169,37 @@ export function Hero() {
             />
             <text
               x={48}
-              y={312}
+              y={272}
               fontSize={22}
               fill="rgb(var(--muted-foreground))"
             >
               Amsterdam
             </text>
             <text
-              x={1330}
-              y={168}
+              x={1345}
+              y={210}
               fontSize={22}
               fill="rgb(var(--muted-foreground))"
             >
               Berlin
             </text>
-            <circle cx={18} cy={332} r={7} fill="rgb(var(--accent-strong))" />
+            <circle cx={18} cy={294} r={7} fill="rgb(var(--accent-strong))" />
             <circle
               cx={1422}
-              cy={198}
+              cy={232}
               r={7}
               fill="rgb(var(--background))"
               stroke="rgb(var(--accent-strong))"
               strokeWidth={3}
             />
-            <g ref={vanRef} transform="translate(18 332)">
+          </motion.svg>
+          <motion.svg
+            viewBox="0 0 1440 420"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-[56svh] z-20 h-[26svh] w-full"
+          >
+            <g ref={vanRef} transform="translate(18 294)">
               <rect
                 x={-64}
                 y={-70}
@@ -290,16 +297,16 @@ export function Hero() {
             style={reduce ? undefined : { y: nearGround }}
             viewBox="0 0 1440 240"
             preserveAspectRatio="none"
-            className="absolute inset-x-0 bottom-0 h-[16svh] w-full"
+            className="absolute inset-x-0 bottom-0 h-[12svh] w-full"
           >
             <path
-              d="M-40 170 C220 120 360 190 580 155 C800 120 940 190 1160 155 C1300 135 1400 160 1480 150 L1480 240 L-40 240 Z"
+              d="M-40 195 C220 155 360 200 580 175 C800 150 940 200 1160 175 C1300 160 1400 180 1480 172 L1480 240 L-40 240 Z"
               fill="rgb(var(--foreground))"
             />
           </motion.svg>
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-center px-6 pt-24 text-center">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-center justify-start px-6 pt-[12svh] text-center">
           <motion.div
             variants={container}
             initial="hidden"
