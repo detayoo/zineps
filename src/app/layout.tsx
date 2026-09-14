@@ -12,7 +12,7 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const SITE_URL = "https://www.zineps.com";
+const SITE_URL = "https://zineps-rose.vercel.app";
 const SITE_NAME = "Zineps";
 const SITE_TITLE = "Zineps — The intelligent layer for logistics";
 const SITE_DESCRIPTION =
