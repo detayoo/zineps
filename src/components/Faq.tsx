@@ -116,9 +116,11 @@ export function Faq() {
                         transition={{ duration: 0.28, ease: EASE }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-[62ch] pb-6 pl-[52px] pr-4 text-[15px] leading-relaxed text-muted-foreground">
-                          {faq.answer}
-                        </p>
+                        <div className="mb-6 ml-[52px] mr-4 rounded border-l-2 border-accent-strong bg-accent-soft px-5 py-4">
+                          <p className="max-w-[62ch] text-[15px] leading-relaxed text-accent-ink">
+                            {faq.answer}
+                          </p>
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>

@@ -18,6 +18,9 @@ the right.
 - Rows are hairline-divided with tabular `01–06` numerals; the plus rotates
   `45°` into a close mark and picks up the accent when open.
 - First item open by default so the section never reads empty.
+- Answers render as callouts in the x-ta `Callout` manner: a `2px` left accent
+  border in `accent-strong` over an `accent-soft` fill, ink text — the answer
+  reads as the explanation to the question above it.
 
 ## Motion
 
