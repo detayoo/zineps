@@ -19,6 +19,7 @@ Dutch-first voice with an EN / DE / ES language switcher.
 
 - **Typography:** Poppins (body + headings). Geist / Geist Mono used for
   numeric/technical surfaces.
+  > **Revamp note:** the revamp uses **Manrope** as the primary typeface.
 - **Logo:** wordmark `zineps` in `#424242` + a mint (`#72C8B9`) orbit mark.
 - **Primary button style:** gradient mint→white (`from-[#70CAB9] to-white`),
   dark text, `rounded-md`.

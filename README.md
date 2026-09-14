@@ -7,7 +7,7 @@ A revamp of <https://www.zineps.com/>. Starting with the header.
 - Next.js 16 (App Router) + React 19
 - Tailwind CSS v3.4 (tokens as CSS custom properties)
 - Framer Motion
-- Poppins (via `next/font`)
+- Manrope (via `next/font`)
 
 ## Getting started
 

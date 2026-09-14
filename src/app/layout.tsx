@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Manrope } from "next/font/google";
 
 import { Header } from "@/components/Header";
 
 import "./globals.css";
 
-const poppins = Poppins({
+const manrope = Manrope({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins",
+  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -22,7 +21,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="nl" className={poppins.variable}>
+    <html lang="nl" className={manrope.variable}>
       <body className="font-sans antialiased">
         <Header variant="one" />
         {children}
