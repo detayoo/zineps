@@ -206,6 +206,11 @@ export function Hero() {
             >
               Amsterdam
             </text>
+            <g aria-hidden="true" className="motion-safe:group-hover:opacity-100 opacity-0 transition-opacity duration-300" transform="translate(20, 240) scale(0.6)">
+              <path d="M10 80 L10 50 L20 35 L30 50 L30 80 Z" fill="rgb(var(--foreground))" opacity="0.6"/>
+              <rect x="16" y="50" width="8" height="30" fill="rgb(var(--foreground))" opacity="0.4"/>
+              <path d="M18 35 L25 25 L32 35" fill="rgb(var(--accent-strong))" opacity="0.8"/>
+            </g>
             <text
               x={1330}
               y={168}
@@ -214,6 +219,11 @@ export function Hero() {
             >
               Berlin
             </text>
+            <g aria-hidden="true" className="motion-safe:group-hover:opacity-100 opacity-0 transition-opacity duration-300" transform="translate(1305, 100) scale(0.6)">
+              <path d="M10 80 L10 50 L20 35 L30 50 L30 80 Z" fill="rgb(var(--foreground))" opacity="0.6"/>
+              <rect x="16" y="50" width="8" height="30" fill="rgb(var(--foreground))" opacity="0.4"/>
+              <path d="M18 35 L25 25 L32 35" fill="rgb(var(--accent-strong))" opacity="0.8"/>
+            </g>
             <circle cx={18} cy={332} r={7} fill="rgb(var(--accent-strong))" />
             <circle
               cx={1422}

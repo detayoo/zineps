@@ -19,11 +19,12 @@ const triggerClass =
 /**
  * A single nav group ("Products", "Knowledge Base").
  *
- * Chowdeck-style: the panel unrolls from the top edge (`origin-top`, `scaleY`
- * 0 → 1) and each item is its own bordered pill that swaps border + text to the
- * brand accent on hover. No shadows — the pill border carries the separation.
+ * The panel unrolls from the top edge (`origin-top`, `scaleY`
+ * 0 → 1` over `200ms` on the house ease). Each item is its own bordered pill that
+ * swaps border + text to the brand accent on hover. No shadows — the pill border
+ * carries the separation.
  *
- * Unlike Chowdeck this is a real disclosure: it opens on hover *and* click/
+ * This is a real disclosure: it opens on hover *and* click/
  * keyboard, closes on Escape, blur-out and outside click, and respects
  * `prefers-reduced-motion`.
  */
