@@ -194,7 +194,7 @@ export function Hero() {
               d="M-20 340 C 280 260, 520 370, 760 270 C 1000 170, 1220 250, 1460 190"
               fill="none"
               stroke="rgb(var(--accent-strong))"
-              strokeWidth={3}
+              strokeWidth={6}
               strokeLinecap="round"
               style={{ pathLength: reduce ? 1 : routeDraw }}
             />
