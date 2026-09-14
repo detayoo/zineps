@@ -2,26 +2,37 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { ChevronDownIcon } from "@/components/icons";
 import type { NavItem } from "@/lib/nav";
 
-import { dropdownMotion, dropdownTransition } from "./motion";
+import {
+  dropdownMotion,
+  dropdownTransition,
+  reducedDropdownMotion,
+} from "./motion";
 
 const triggerClass =
   "flex h-full items-center gap-1.5 rounded px-3.5 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
 
 /**
  * A single nav group ("Products", "Knowledge Base").
- * Opens on hover and on click/keyboard, closes on Escape, blur-out or outside click.
- * The panel has no padding or border, so hovered rows run edge to edge.
+ *
+ * Chowdeck-style: the panel unrolls from the top edge (`origin-top`, `scaleY`
+ * 0 → 1) and each item is its own bordered pill that swaps border + text to the
+ * brand accent on hover. No shadows — the pill border carries the separation.
+ *
+ * Unlike Chowdeck this is a real disclosure: it opens on hover *and* click/
+ * keyboard, closes on Escape, blur-out and outside click, and respects
+ * `prefers-reduced-motion`.
  */
 export function HeaderDropdown({ item }: { item: NavItem }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
+  const reduceMotion = useReducedMotion();
 
   const cancelClose = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -69,7 +80,7 @@ export function HeaderDropdown({ item }: { item: NavItem }) {
       >
         {item.label}
         <ChevronDownIcon
-          className={`h-4 w-4 transition-transform duration-200 ${
+          className={`h-4 w-4 transition-transform duration-300 ${
             open ? "rotate-180" : ""
           }`}
         />
@@ -79,19 +90,19 @@ export function HeaderDropdown({ item }: { item: NavItem }) {
         {open && (
           <motion.div
             id={panelId}
-            {...dropdownMotion}
+            {...(reduceMotion ? reducedDropdownMotion : dropdownMotion)}
             transition={dropdownTransition}
-            className="absolute left-1/2 top-full z-50 w-[22rem] -translate-x-1/2 pt-2"
+            className="absolute left-1/2 top-full z-50 w-[19rem] origin-top -translate-x-1/2 pt-2"
           >
-            <ul className="overflow-hidden rounded bg-background shadow-[0_16px_40px_-20px_rgba(11,18,16,0.28)]">
+            <ul className="flex flex-col gap-2">
               {item.children?.map((child) => (
                 <li key={child.label}>
                   <Link
                     href={child.href}
                     onClick={() => setOpen(false)}
-                    className="block w-full px-4 py-3 transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40"
+                    className="group/item block w-full rounded border border-border bg-background px-4 py-2.5 transition-all duration-200 hover:scale-[1.02] hover:border-accent-strong hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40"
                   >
-                    <span className="flex items-center gap-2 text-[14px] font-medium text-foreground">
+                    <span className="flex items-center gap-2 text-[14px] font-medium text-foreground transition-colors duration-200 group-hover/item:text-accent-strong">
                       {child.label}
                       {child.badge && (
                         <span className="rounded bg-accent-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent-strong">

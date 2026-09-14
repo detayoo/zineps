@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 
 import { ChevronDownIcon } from "@/components/icons";
 import { defaultLanguage, languages } from "@/lib/nav";
 
-import { dropdownMotion, dropdownTransition } from "./motion";
+import {
+  dropdownMotion,
+  dropdownTransition,
+  reducedDropdownMotion,
+} from "./motion";
 
 /** Language picker — sits in the header's right cluster. */
 export function LanguageSwitcher() {
@@ -14,6 +18,7 @@ export function LanguageSwitcher() {
   const [current, setCurrent] = useState(defaultLanguage);
   const rootRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (!open) return;
@@ -44,7 +49,7 @@ export function LanguageSwitcher() {
         <span aria-hidden="true">{current.flag}</span>
         <span>{current.code}</span>
         <ChevronDownIcon
-          className={`h-3.5 w-3.5 transition-transform duration-200 ${
+          className={`h-3.5 w-3.5 transition-transform duration-300 ${
             open ? "rotate-180" : ""
           }`}
         />
@@ -54,11 +59,11 @@ export function LanguageSwitcher() {
         {open && (
           <motion.div
             id={panelId}
-            {...dropdownMotion}
+            {...(reduceMotion ? reducedDropdownMotion : dropdownMotion)}
             transition={dropdownTransition}
-            className="absolute right-0 top-full z-50 w-52 pt-2"
+            className="absolute right-0 top-full z-50 w-[13rem] origin-top pt-2"
           >
-            <ul className="overflow-hidden rounded bg-background shadow-[0_16px_40px_-20px_rgba(11,18,16,0.28)]">
+            <ul className="flex flex-col gap-2">
               {languages.map((language) => {
                 const active = language.code === current.code;
                 return (
@@ -69,14 +74,20 @@ export function LanguageSwitcher() {
                         setCurrent(language);
                         setOpen(false);
                       }}
-                      className={`flex w-full items-center gap-2.5 px-3.5 py-2.5 text-left text-[13.5px] transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40 ${
-                        active
-                          ? "font-semibold text-foreground"
-                          : "text-muted-foreground"
+                      className={`group/item flex w-full items-center gap-2.5 rounded border bg-background px-3.5 py-2.5 text-left text-[13.5px] transition-all duration-200 hover:scale-[1.02] hover:border-accent-strong hover:bg-accent-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40 ${
+                        active ? "border-accent" : "border-border"
                       }`}
                     >
                       <span aria-hidden="true">{language.flag}</span>
-                      <span className="flex-1">{language.label}</span>
+                      <span
+                        className={`flex-1 transition-colors duration-200 group-hover/item:text-accent-strong ${
+                          active
+                            ? "font-semibold text-foreground"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {language.label}
+                      </span>
                       <span className="text-[11px] uppercase tracking-wide text-muted-foreground">
                         {language.code}
                       </span>

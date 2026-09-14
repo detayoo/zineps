@@ -23,19 +23,22 @@ writing copy. The design language is defined by the tokens in
 2. **Radius is 4px.** The Tailwind `borderRadius` scale is overridden in
    `tailwind.config.ts`, so every `rounded-*` utility resolves to 4px. Do not
    reintroduce pills or large radii.
-3. **Flush hover surfaces.** Dropdown panels have no padding and no border — rows
-   run edge to edge. Borderless floating panels may use a soft shadow for
-   separation; this is the *only* sanctioned shadow.
-4. **Desktop-first breakpoints.** Every breakpoint except `2xl` is a max-width
+3. **No shadows.** Elevation is a hairline border (`border-border`), never
+   `shadow-*`. Dropdown panels are borderless stacks of bordered pills, so they
+   need no shadow.
+4. **Dropdown language.** Panels unroll from the top edge (`origin-top`, `scaleY`
+   `0 → 1`, 200ms, house ease) and each item is its own pill that swaps border +
+   text to the brand accent on hover. Respect `prefers-reduced-motion`.
+5. **Desktop-first breakpoints.** Every breakpoint except `2xl` is a max-width
    override. Write base (desktop) styles first, then override downward.
-5. **Variant architecture for sections.** Anything that differs structurally per
+6. **Variant architecture for sections.** Anything that differs structurally per
    theme gets `ComponentName/index.tsx` + `variants/ComponentNameVariantN.tsx`.
    Ternaries are for small style/visibility tweaks only. The `variant` union is
    always `"one" | "two" | "three" | "four"`; the resolver falls back to `one`.
-6. **Interactive primitives own their own state.** Dropdowns, the language
+7. **Interactive primitives own their own state.** Dropdowns, the language
    picker and the mobile overlay are self-contained components. `useHeader` holds
    only page-level state (scroll, overlay visibility, scroll lock).
-7. **Accessibility.** Disclosure pattern (`aria-expanded` + `aria-controls`) for
+8. **Accessibility.** Disclosure pattern (`aria-expanded` + `aria-controls`) for
    dropdowns, `role="dialog" aria-modal="true"` + focus trap for the overlay,
    `focus-visible` rings on everything interactive, `Escape` closes.
 
