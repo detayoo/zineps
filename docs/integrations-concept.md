@@ -1,0 +1,36 @@
+# Integrations Concept
+
+"100+ integrations", from the reference's integration marquee. Heading row
+with the promise and a view-all link, over a ruled wall of platform names —
+text set in place of logo assets, which the revamp doesn't carry.
+
+## Copy (reference, English-first)
+
+Heading: "100+ integrations". Sub compressed from the source (marketplaces,
+platforms, partners; workflow, costs, seamless experience). Link: "View
+integrations" → `/integrations`. Eighteen names from the source marquee:
+Shopify, WooCommerce, Bol.com, Amazon, PostNL, DHL, DPD, UPS, FedEx, GLS,
+Magento, Correos, Bpost, Temu, DB Schenker, CCV Shop, SnelStart, Exact.
+
+## Design
+
+- Hairline grid via the `gap-px` + `bg-border` trick inside a rounded,
+  overflow-hidden frame — dividers without nesting borders.
+- 6 columns → 4 below `lg` → 2 below `sm`. Cells hover mint (`accent-soft`
+  fill, `accent-ink` text).
+
+## Motion
+
+Scroll reveals only: `opacity 0 → 1`, `y 24 → 0`, `600ms`, house ease, grid
+trailing by `100ms`. Reduced motion renders static.
+
+## Accessibility
+
+- `section[aria-labelledby]` → one `h2`; platforms are a real list.
+- Names are text, never images without alt — nothing to miss.
+
+## Tokens used
+
+Surfaces `background`, hairlines `border`, hover `accent-soft` / `accent-ink`,
+text `foreground` / `muted-foreground` / `accent-strong`. Radius `rounded`
+(4px). No shadows.

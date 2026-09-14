@@ -1,6 +1,6 @@
 # Zineps — Website Revamp
 
-A revamp of <https://www.zineps.com/>. Currently: header + hero + differentiation + FAQ + final CTA + footer.
+A revamp of <https://www.zineps.com/>. Currently: header + hero + integrations + differentiation + FAQ + final CTA + footer.
 UI copy is English-first for now.
 
 ## Stack
@@ -30,6 +30,7 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`
 - `docs/final-cta-concept.md` — the closing CTA section and Linear styling.
 - `docs/faq-concept.md` — the FAQ accordion and copy.
 - `docs/differentiation-concept.md` — the "what sets us apart" grid.
+- `docs/integrations-concept.md` — the integrations wall.
 
 ## Layout
 
@@ -42,6 +43,7 @@ src/
 │   ├── FinalCta.tsx         the closing call to action
 │   ├── Faq.tsx              the FAQ accordion
 │   ├── Differentiation.tsx  the "what sets us apart" grid
+│   ├── Integrations.tsx     the integrations wall
 │   ├── Footer.tsx           the footer (closing CTA + links + wordmark)
 │   ├── ZinepsLogo.tsx
 │   └── icons.tsx
