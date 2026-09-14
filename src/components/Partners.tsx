@@ -116,7 +116,7 @@ export function Partners() {
                     onClick={() =>
                       setOpenIndex(openIndex === index ? null : index)
                     }
-                    className={`flex w-full items-center gap-4 py-4 text-left transition-colors duration-200 hover:bg-accent-soft/60 ${focusRing} rounded`}
+                    className={`flex w-full items-center gap-4 py-4 text-left ${focusRing} rounded`}
                   >
                     <span
                       aria-hidden="true"
