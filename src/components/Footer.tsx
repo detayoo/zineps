@@ -60,11 +60,11 @@ export function Footer() {
   const sentence = "start where you are.";
   const letterContainer: Variants = {
     hidden: {},
-    show: { transition: { staggerChildren: 0.035, delayChildren: 0.4 } },
+    show: { transition: { staggerChildren: 0.055, delayChildren: 0.8 } },
   };
   const letter: Variants = {
-    hidden: { opacity: 0, y: reduce ? 0 : 5 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.22 } },
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { duration: 0.01 } },
   };
 
   return (
@@ -121,9 +121,23 @@ export function Footer() {
                       variants={letter}
                       className="inline-block"
                     >
-                      {char === " " ? " " : char}
+                      {char === " " ? " " : char}
                     </motion.span>
                   ))}
+                  {!reduce && (
+                    <motion.span
+                      aria-hidden="true"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: [0, 1, 0, 1, 0, 1, 0] }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 1.2,
+                        delay: 0.85,
+                        times: [0, 0.15, 0.35, 0.5, 0.7, 0.85, 1],
+                      }}
+                      className="ml-1 inline-block h-[1em] w-[0.14em] translate-y-[0.12em] bg-accent-ink"
+                    />
+                  )}
                 </motion.span>
               </motion.span>
             </span>
