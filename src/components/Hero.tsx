@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   motion,
@@ -21,36 +21,51 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
 const WHEEL_BASE: Array<[number, number]> = [
-  [-36, -14],
-  [36, -14],
+  [34, 96],
+  [106, 96],
 ];
 const WHEEL_RADIUS = 14;
 
 /**
- * Drive the van along the route path. Reads the path geometry directly, so the
- * marker can never detach from the line: position from `getPointAtLength`,
- * heading from the tangent, wheel spin from travelled distance. Transform-only,
- * written straight to the DOM — no re-renders per scroll frame.
+ * Drive the van along the route path, in screen pixels. The route SVG
+ * stretches non-uniformly to fill its band, so positioning inside it would
+ * squash the van — instead the path point is mapped to pixels and applied
+ * to an overlay whose own aspect never distorts. Position from
+ * `getPointAtLength`, heading corrected for the non-uniform scale, wheel
+ * spin from travelled distance. Transform-only, written straight to the
+ * DOM — no re-renders per scroll frame.
  */
 function updateVan(
   path: SVGPathElement | null,
-  van: SVGGElement | null,
+  band: HTMLDivElement | null,
+  stage: HTMLDivElement | null,
+  van: HTMLDivElement | null,
   wheels: Array<SVGGElement | null>,
   progress: number,
 ) {
-  if (!path || !van) return;
+  if (!path || !band || !stage || !van) return;
+  const bandRect = band.getBoundingClientRect();
+  const stageRect = stage.getBoundingClientRect();
+  if (!bandRect.width || !bandRect.height) return;
+  const scaleX = bandRect.width / 1440;
+  const scaleY = bandRect.height / 420;
   const length = path.getTotalLength();
   if (!length) return;
   const clamped = Math.min(Math.max(progress, 0), 1);
   const distance = clamped * length;
   const point = path.getPointAtLength(distance);
   const ahead = path.getPointAtLength(Math.min(distance + 1, length));
+  const x = bandRect.left - stageRect.left + point.x * scaleX;
+  const y = bandRect.top - stageRect.top + point.y * scaleY;
   const angle =
-    (Math.atan2(ahead.y - point.y, ahead.x - point.x) * 180) / Math.PI;
-  van.setAttribute(
-    "transform",
-    `translate(${point.x} ${point.y}) rotate(${angle})`,
-  );
+    (Math.atan2(
+      (ahead.y - point.y) * scaleY,
+      (ahead.x - point.x) * scaleX,
+    ) *
+      180) /
+    Math.PI;
+  van.style.visibility = "visible";
+  van.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
   const spin = (distance / WHEEL_RADIUS) * (180 / Math.PI);
   wheels.forEach((wheel, index) => {
     const [cx, cy] = WHEEL_BASE[index] ?? [0, 0];
@@ -70,9 +85,12 @@ function updateVan(
 export function Hero() {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const bandRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const vanRef = useRef<SVGGElement>(null);
+  const vanRef = useRef<HTMLDivElement>(null);
   const wheelRefs = useRef<Array<SVGGElement | null>>([]);
+  const progressRef = useRef(0);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
@@ -84,23 +102,29 @@ export function Hero() {
   const nearGround = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
   const routeDraw = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
 
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
+  // Stable placement helper for the mount/resize effect below.
+  const placeVan = useCallback((progress: number) => {
+    progressRef.current = progress;
     updateVan(
       pathRef.current,
+      bandRef.current,
+      stageRef.current,
       vanRef.current,
       wheelRefs.current,
-      reduce ? 1 : value,
+      progress,
     );
+  }, []);
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    placeVan(reduce ? 1 : value);
   });
 
   useEffect(() => {
-    updateVan(
-      pathRef.current,
-      vanRef.current,
-      wheelRefs.current,
-      reduce ? 1 : scrollYProgress.get(),
-    );
-  }, [reduce, scrollYProgress]);
+    placeVan(reduce ? 1 : scrollYProgress.get());
+    const onResize = () => placeVan(progressRef.current);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [placeVan, reduce, scrollYProgress]);
 
   const container: Variants = {
     hidden: {},
@@ -122,7 +146,10 @@ export function Hero() {
       aria-labelledby="hero-heading"
       className="relative h-[220svh] bg-background"
     >
-      <div className="sticky top-0 flex h-svh flex-col overflow-hidden bg-gradient-to-b from-accent-soft/90 via-background to-background">
+      <div
+        ref={stageRef}
+        className="sticky top-0 flex h-svh flex-col overflow-hidden bg-gradient-to-b from-accent-soft/90 via-background to-background"
+      >
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <motion.div
             style={reduce ? undefined : { y: skyDrift }}
@@ -152,11 +179,15 @@ export function Hero() {
               fillOpacity={0.3}
             />
           </motion.svg>
+          <div
+            ref={bandRef}
+            className="absolute inset-x-0 top-[30svh] h-[34svh]"
+          >
           <motion.svg
             viewBox="0 0 1440 420"
             preserveAspectRatio="none"
             aria-hidden="true"
-            className="absolute inset-x-0 top-[30svh] h-[34svh] w-full"
+            className="absolute inset-0 h-full w-full"
           >
             <motion.path
               ref={pathRef}
@@ -192,100 +223,8 @@ export function Hero() {
               stroke="rgb(var(--accent-strong))"
               strokeWidth={3}
             />
-            <g ref={vanRef} transform="translate(18 332)">
-              <rect
-                x={-64}
-                y={-70}
-                width={64}
-                height={46}
-                rx={6}
-                fill="rgb(var(--background))"
-                stroke="rgb(var(--foreground))"
-                strokeWidth={3}
-              />
-              <text
-                x={-57}
-                y={-40}
-                fontSize={12.5}
-                fontWeight={800}
-                letterSpacing={1.5}
-                fill="rgb(var(--foreground))"
-              >
-                zineps
-              </text>
-              <rect
-                x={-58}
-                y={-33}
-                width={52}
-                height={8}
-                rx={2}
-                fill="rgb(var(--accent))"
-              />
-              <path
-                d="M0 -66 L28 -66 L50 -30 L57 -30 L57 -22 L0 -22 Z"
-                fill="rgb(var(--background))"
-                stroke="rgb(var(--foreground))"
-                strokeWidth={3}
-                strokeLinejoin="round"
-              />
-              <path
-                d="M9 -59 L25 -59 L39 -33 L9 -33 Z"
-                fill="rgb(var(--accent-strong))"
-              />
-              <line
-                x1={40}
-                y1={-54}
-                x2={46}
-                y2={-50}
-                stroke="rgb(var(--foreground))"
-                strokeWidth={2}
-              />
-              <circle
-                cx={47.5}
-                cy={-49}
-                r={2.5}
-                fill="rgb(var(--foreground))"
-              />
-              <rect
-                x={51}
-                y={-31}
-                width={6}
-                height={6}
-                rx={2}
-                fill="rgb(var(--accent))"
-                stroke="rgb(var(--foreground))"
-                strokeWidth={1.5}
-              />
-              {WHEEL_BASE.map(([cx, cy], index) => (
-                <g
-                  key={`${cx}-${cy}`}
-                  ref={(element) => {
-                    wheelRefs.current[index] = element;
-                  }}
-                  transform={`translate(${cx} ${cy})`}
-                >
-                  <circle r={14} fill="rgb(var(--foreground))" />
-                  <line
-                    x1={-8}
-                    y1={0}
-                    x2={8}
-                    y2={0}
-                    stroke="rgb(var(--background))"
-                    strokeWidth={2.4}
-                  />
-                  <line
-                    x1={0}
-                    y1={-8}
-                    x2={0}
-                    y2={8}
-                    stroke="rgb(var(--background))"
-                    strokeWidth={2.4}
-                  />
-                  <circle r={3} fill="rgb(var(--background))" />
-                </g>
-              ))}
-            </g>
           </motion.svg>
+          </div>
           <motion.svg
             style={reduce ? undefined : { y: nearGround }}
             viewBox="0 0 1440 240"
@@ -364,6 +303,110 @@ export function Hero() {
               Scroll to follow the route — no contract needed to start.
             </motion.p>
           </motion.div>
+        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-20"
+        >
+          <div ref={vanRef} className="invisible absolute left-0 top-0">
+            <svg
+              viewBox="0 0 140 110"
+              aria-hidden="true"
+              className="block w-[clamp(72px,9vw,116px)] -translate-x-1/2 -translate-y-full"
+            >
+              <rect
+                x={6}
+                y={40}
+                width={64}
+                height={46}
+                rx={6}
+                fill="rgb(var(--background))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={3}
+              />
+              <text
+                x={13}
+                y={70}
+                fontSize={12.5}
+                fontWeight={800}
+                letterSpacing={1.5}
+                fill="rgb(var(--foreground))"
+              >
+                zineps
+              </text>
+              <rect
+                x={12}
+                y={77}
+                width={52}
+                height={8}
+                rx={2}
+                fill="rgb(var(--accent))"
+              />
+              <path
+                d="M70 44 L98 44 L120 80 L127 80 L127 88 L70 88 Z"
+                fill="rgb(var(--background))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={3}
+                strokeLinejoin="round"
+              />
+              <path
+                d="M79 51 L95 51 L109 77 L79 77 Z"
+                fill="rgb(var(--accent-strong))"
+              />
+              <line
+                x1={110}
+                y1={56}
+                x2={116}
+                y2={60}
+                stroke="rgb(var(--foreground))"
+                strokeWidth={2}
+              />
+              <circle
+                cx={117.5}
+                cy={61}
+                r={2.5}
+                fill="rgb(var(--foreground))"
+              />
+              <rect
+                x={121}
+                y={79}
+                width={6}
+                height={6}
+                rx={2}
+                fill="rgb(var(--accent))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={1.5}
+              />
+              {WHEEL_BASE.map(([cx, cy], index) => (
+                <g
+                  key={`${cx}-${cy}`}
+                  ref={(element) => {
+                    wheelRefs.current[index] = element;
+                  }}
+                  transform={`translate(${cx} ${cy})`}
+                >
+                  <circle r={14} fill="rgb(var(--foreground))" />
+                  <line
+                    x1={-8}
+                    y1={0}
+                    x2={8}
+                    y2={0}
+                    stroke="rgb(var(--background))"
+                    strokeWidth={2.4}
+                  />
+                  <line
+                    x1={0}
+                    y1={-8}
+                    x2={0}
+                    y2={8}
+                    stroke="rgb(var(--background))"
+                    strokeWidth={2.4}
+                  />
+                  <circle r={3} fill="rgb(var(--background))" />
+                </g>
+              ))}
+            </svg>
+          </div>
         </div>
       </div>
     </section>

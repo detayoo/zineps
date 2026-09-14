@@ -22,10 +22,15 @@ Masthead” on the same wide rail.
   progress `0.2 → 0.8`, with origin/destination nodes and city labels.
 - **The van** — a flat token-built box van: white cargo box with the wordmark
   and a mint stripe, glazed cab with mirror and headlight, big spoked wheels.
-  It rides the route with position from the path geometry itself
-  (`getPointAtLength`), heading from the tangent, wheel spin from travelled
-  distance — so it can never detach from the line. Updates write straight to
-  the DOM transform, no re-renders per scroll frame.
+  It rides the route in a separate overlay **above the copy** (`z-20`,
+  `pointer-events-none`, `aria-hidden`), so it can never be covered
+  mid-journey; the line itself stays behind the text. Because the route SVG
+  stretches non-uniformly to fill its band, the van lives outside it: each
+  path point is mapped to screen pixels (heading corrected for the uneven
+  scale), keeping the van's aspect true on any viewport. Position from the
+  path geometry (`getPointAtLength`), heading from the tangent, wheel spin
+  from travelled distance. DOM-transform writes, recomputed on resize, no
+  re-renders per scroll frame.
 - **Promise block** — a left-aligned column (`max-w-[660px]`) holding the
   eyebrow tag, H1 kept close to the source, compressed subcopy, verb-first CTAs
   (`Start shipping`, `Explore the partner platform`), and the no-contract
