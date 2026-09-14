@@ -90,6 +90,25 @@ export function Footer() {
             Start where you are
           </p>
 
+          <svg aria-hidden="true" className="absolute h-0 w-0">
+            <defs>
+              <filter id="zineps-marker-rough">
+                <feTurbulence
+                  type="fractalNoise"
+                  baseFrequency="0.015 0.1"
+                  numOctaves={2}
+                  seed={8}
+                  result="noise"
+                />
+                <feDisplacementMap
+                  in="SourceGraphic"
+                  in2="noise"
+                  scale={6}
+                />
+              </filter>
+            </defs>
+          </svg>
+
           <h2 className="mt-6 max-w-[720px] text-balance text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-foreground md:text-[32px] sm:text-[28px]">
             Software, network and intelligence,{" "}
             <span className="relative inline-block -rotate-1">
@@ -99,22 +118,23 @@ export function Footer() {
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.45 }}
-                className="absolute bottom-0 left-1.5 right-0 top-1.5 origin-left bg-accent-strong"
+                className="absolute bottom-0 left-1.5 right-0 top-1.5 origin-left bg-accent-strong [filter:url(#zineps-marker-rough)]"
               />
               <motion.span
+                aria-hidden="true"
                 initial={reduce ? false : { scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
-                className="relative inline-block origin-left bg-accent px-2 text-accent-ink box-decoration-clone"
+                className="absolute inset-0 origin-left bg-accent [filter:url(#zineps-marker-rough)]"
+              />
+              <motion.span
+                variants={letterContainer}
+                initial={reduce ? false : "hidden"}
+                whileInView="show"
+                viewport={{ once: true }}
+                className="relative inline-block px-2 text-accent-ink"
               >
-                <motion.span
-                  variants={letterContainer}
-                  initial={reduce ? false : "hidden"}
-                  whileInView="show"
-                  viewport={{ once: true }}
-                  className="inline-block"
-                >
                   {sentence.split("").map((char, index) => (
                     <motion.span
                       key={`${char}-${index}`}
@@ -124,22 +144,7 @@ export function Footer() {
                       {char === " " ? " " : char}
                     </motion.span>
                   ))}
-                  {!reduce && (
-                    <motion.span
-                      aria-hidden="true"
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: [0, 1, 0, 1, 0, 1, 0] }}
-                      viewport={{ once: true }}
-                      transition={{
-                        duration: 1.2,
-                        delay: 0.85,
-                        times: [0, 0.15, 0.35, 0.5, 0.7, 0.85, 1],
-                      }}
-                      className="ml-1 inline-block h-[1em] w-[0.14em] translate-y-[0.12em] bg-accent-ink"
-                    />
-                  )}
                 </motion.span>
-              </motion.span>
             </span>
           </h2>
 

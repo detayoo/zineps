@@ -9,9 +9,10 @@ the page. All copy is the captured zineps reference, English-first.
 
 - **Closing CTA block** — badge pill, big two-line headline with the second
   line as a styled marker: tilted `-1deg`, mint face over an offset deep-teal
-  backing, wiping in (`scaleX`, origin-left, staggered) when scrolled into
-  view, with the line typing itself out character by character (`55ms`
-  cadence, discrete pops) while a caret blinks and dies as it finishes. Subcopy, actions, all over a faint token grid (`border`
+  backing, both with torn edges from a turbulence-displacement filter while
+  the letters stay crisp, wiping in (`scaleX`, origin-left, staggered) when
+  scrolled into view, with the line typing itself out character by character
+  (`55ms` cadence, discrete pops). Subcopy, actions, all over a faint token grid (`border`
   hairlines at 48px, radially masked so it breathes out at the edges).
   Ramblings captures an email for a waitlist; zineps has no waitlist, so the
   form becomes the reference's own CTAs: `Start your trial` (primary, mint)
