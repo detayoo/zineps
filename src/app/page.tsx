@@ -12,26 +12,29 @@ export default function Home() {
       <section className="flex flex-col items-center pb-24 pt-[168px] text-center sm:pt-[132px]">
         <span className="mb-6 inline-flex items-center gap-2 rounded-pill border border-border bg-accent-soft px-4 py-1.5 text-[13px] font-medium text-accent-strong">
           <span className="h-1.5 w-1.5 rounded-full bg-accent-strong" />
-          De intelligente laag voor de logistiek
+          The intelligent layer for logistics
         </span>
 
         <h1 className="max-w-[900px] text-balance text-[44px] font-semibold leading-[1.08] tracking-[-0.02em] md:text-[36px] sm:text-[30px]">
-          Voor bedrijven die verzenden, en de logistieke partners die hun
-          goederen vervoeren
+          For companies that ship, and the logistics partners that move their
+          goods
         </h1>
 
         <p className="mt-6 max-w-[620px] text-[17px] leading-relaxed text-muted-foreground">
-          Eén infrastructuur met een dashboard en API. Gebruik scherpe
-          verzendtarieven uit ons netwerk van logistieke dienstverleners, je
-          eigen verzendcontracten, of allebei.
+          One infrastructure with a dashboard and an API. Use sharp shipping
+          rates from our network of logistics service providers, your own
+          shipping contracts, or both.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <Link href="https://app.zineps.com/Account/Register" className={primaryCta}>
-            Start met verzenden
+          <Link
+            href="https://app.zineps.com/Account/Register"
+            className={primaryCta}
+          >
+            Start shipping
           </Link>
           <Link href="/logistics-operating-system" className={secondaryCta}>
-            Ik ben logistiek partner
+            I&apos;m a logistics partner
           </Link>
         </div>
 
@@ -45,8 +48,8 @@ export default function Home() {
       {/* Scroll stage — proves the capsule's scrolled state. */}
       <section className="grid grid-cols-3 gap-4 pb-32 lg:grid-cols-2 md:grid-cols-1">
         {[
-          "Partner-verzendtarieven",
-          "Verzendproces automatiseren",
+          "Partner shipping rates",
+          "Automate your shipping process",
           "Shipping AI",
         ].map((title) => (
           <div
@@ -55,7 +58,7 @@ export default function Home() {
           >
             <h2 className="text-[20px] font-medium">{title}</h2>
             <p className="mt-3 text-[14.5px] leading-relaxed text-muted-foreground">
-              Scroll om de compacte, scherpe staat van de header te zien.
+              Scroll to see the header&apos;s compact, sharp state.
             </p>
           </div>
         ))}

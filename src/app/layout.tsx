@@ -12,16 +12,16 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Zineps — De intelligente laag voor de logistiek",
+  title: "Zineps — The intelligent layer for logistics",
   description:
-    "AI Shipping Software voor e-commerce & logistiek. Eén infrastructuur met een dashboard en API, met partner-verzendtarieven of je eigen contracten.",
+    "AI shipping software for e-commerce and logistics. One infrastructure with a dashboard and an API, using partner shipping rates or your own contracts.",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="nl" className={manrope.variable}>
+    <html lang="en" className={manrope.variable}>
       <body className="font-sans antialiased">
         <Header variant="one" />
         {children}

@@ -51,7 +51,7 @@ export function HeaderVariantOne() {
           </Link>
 
           <nav
-            aria-label="Hoofdnavigatie"
+            aria-label="Main navigation"
             className="flex items-center gap-1 lg:hidden"
           >
             {primaryNav.map((item) =>
@@ -69,14 +69,14 @@ export function HeaderVariantOne() {
             <div className="flex items-center gap-2 lg:hidden">
               <LanguageSwitcher />
               <Link href={authLinks.signIn} className={ctaClass}>
-                Aanmelden
+                Sign up
               </Link>
             </div>
 
             <button
               type="button"
               onClick={() => setMobileOpen(true)}
-              aria-label="Menu openen"
+              aria-label="Open menu"
               className="hidden rounded-full p-2 text-foreground transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40 lg:inline-flex"
             >
               <MenuIcon className="h-6 w-6" />

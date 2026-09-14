@@ -69,7 +69,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           ref={panelRef}
           role="dialog"
           aria-modal="true"
-          aria-label="Navigatie"
+          aria-label="Navigation"
           initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
@@ -84,7 +84,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               ref={closeRef}
               type="button"
               onClick={onClose}
-              aria-label="Menu sluiten"
+              aria-label="Close menu"
               className="rounded-full p-2 text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
             >
               <CloseIcon className="h-6 w-6" />
@@ -183,7 +183,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                 onClick={onClose}
                 className="flex w-full items-center justify-center rounded-pill bg-accent px-6 py-3.5 text-[15px] font-semibold text-accent-ink transition-colors hover:bg-accent/90"
               >
-                Aanmelden
+                Sign up
               </Link>
             </motion.div>
           </motion.nav>

@@ -13,42 +13,42 @@ export interface NavItem {
 
 /**
  * Primary navigation — mirrors the live zineps.com header structure.
- * Content sourced in docs/zineps-content.md.
+ * UI copy is English-first for now; source content in docs/zineps-content.md.
  */
 export const primaryNav: NavItem[] = [
   {
-    label: "Producten",
+    label: "Products",
     href: "/shipping",
     children: [
       {
-        label: "Verzending voor e-commerce en mkb",
+        label: "Shipping for e-commerce and SMBs",
         href: "/shipping",
-        description: "Labels, retouren en dynamische checkout in één flow.",
+        description: "Labels, returns and dynamic checkout in one flow.",
       },
       {
-        label: "Platform voor logistieke dienstverleners",
+        label: "Logistics service provider platform",
         href: "/logistics-operating-system",
-        description: "Tarieven, contracten en marges centraal beheren.",
+        description: "Rates, contracts and margins in one place.",
       },
       {
         label: "Shipping AI",
         href: "/ai-shipping-intelligence",
-        description: "Voorspel vertragingen, kies betere routes, betaal minder.",
+        description: "Predict delays, pick better routes, pay less.",
         badge: "Beta",
       },
     ],
   },
-  { label: "Integraties", href: "/integrations" },
-  { label: "Prijzen", href: "/pricing" },
-  { label: "Blog", href: "/blog?lang=nl" },
+  { label: "Integrations", href: "/integrations" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog?lang=en" },
   {
     label: "Knowledge Base",
     href: "/knowledge-base",
     children: [
-      { label: "Overzicht", href: "/knowledge-base" },
-      { label: "Helpcenter", href: "/knowledge-base/helpcenter" },
+      { label: "Overview", href: "/knowledge-base" },
+      { label: "Help Center", href: "/knowledge-base/helpcenter" },
       { label: "Use Cases", href: "#", badge: "Coming soon" },
-      { label: "API Documentatie", href: "/knowledge-base/api-docs" },
+      { label: "API Documentation", href: "/knowledge-base/api-docs" },
     ],
   },
 ];
@@ -67,7 +67,7 @@ export const languages: Language[] = [
   { code: "ES", label: "Español", flag: "🇪🇸", href: "/?lang=es" },
 ];
 
-export const defaultLanguage = languages[1];
+export const defaultLanguage = languages[0];
 
 export const authLinks = {
   signIn: "https://app.zineps.com/Account/Register",

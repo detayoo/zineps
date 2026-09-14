@@ -1,6 +1,7 @@
 # Zineps — Website Revamp
 
 A revamp of <https://www.zineps.com/>. Starting with the header.
+UI copy is English-first for now.
 
 ## Stack
 

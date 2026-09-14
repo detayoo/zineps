@@ -1,8 +1,11 @@
 # Zineps — Website Content Reference
 
 Captured from <https://www.zineps.com/> on 2026-09-14 for the revamp.
-This is the source of truth for copy, navigation and brand. The revamp keeps the
-Dutch-first voice with an EN / DE / ES language switcher.
+This is the source of truth for copy, navigation and brand. The live site is
+Dutch-first with an EN / DE / ES switcher.
+
+> **Revamp note:** the revamp is **English-first for now**. The language switcher
+> is in place; only the default copy has been translated to English.
 
 ---
 

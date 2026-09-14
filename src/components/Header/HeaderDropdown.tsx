@@ -13,7 +13,7 @@ const triggerClass =
   "flex items-center gap-1.5 rounded-pill px-3.5 py-2 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
 /**
- * A single nav group ("Producten", "Knowledge Base").
+ * A single nav group ("Products", "Knowledge Base").
  * Opens on hover and on click/keyboard, closes on Escape, blur-out or outside click.
  */
 export function HeaderDropdown({ item }: { item: NavItem }) {

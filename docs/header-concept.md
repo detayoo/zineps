@@ -5,6 +5,10 @@ Makesales `HeaderVariantOne` (x-itaja) — a floating, centered pill that hovers
 over the page — and adapts it to zineps' content weight (5 nav items, 2
 dropdowns, a language switcher and an auth CTA).
 
+> **Language:** the UI is English-first for now. The live site is Dutch-first
+> with an EN / DE / ES switcher; the switcher is in place, only the default copy
+> has changed.
+
 Reference: `x-itaja/src/components/Header/variants/HeaderVariantOne.tsx`.
 
 ---
@@ -88,7 +92,7 @@ desktop and override downward.
 
 ## Accessibility
 
-- Nav is a `<nav aria-label="Hoofdnavigatie">`; dropdown triggers are `<button>`
+- Nav is a `<nav aria-label="Main navigation">`; dropdown triggers are `<button>`
   with `aria-expanded` + `aria-controls` (disclosure pattern, not `role="menu"`).
 - Dropdowns open on hover, click and keyboard; close on `Escape`, blur-out and
   outside click.
