@@ -1,6 +1,6 @@
 # Zineps — Website Revamp
 
-A revamp of <https://www.zineps.com/>. Currently: header + hero + integrations + differentiation + FAQ + final CTA + footer.
+A revamp of <https://www.zineps.com/>. Currently: header + hero + partners + integrations + differentiation + FAQ + final CTA + footer.
 UI copy is English-first for now.
 
 ## Stack
@@ -31,6 +31,7 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`
 - `docs/faq-concept.md` — the FAQ accordion and copy.
 - `docs/differentiation-concept.md` — the "what sets us apart" grid.
 - `docs/integrations-concept.md` — the integrations wall.
+- `docs/partners-concept.md` — the logistics-partners pitch.
 
 ## Layout
 
@@ -44,6 +45,7 @@ src/
 │   ├── Faq.tsx              the FAQ accordion
 │   ├── Differentiation.tsx  the "what sets us apart" grid
 │   ├── Integrations.tsx     the integrations wall
+│   ├── Partners.tsx         the logistics-partners pitch
 │   ├── Footer.tsx           the footer (closing CTA + links + wordmark)
 │   ├── ZinepsLogo.tsx
 │   └── icons.tsx
