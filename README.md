@@ -1,6 +1,6 @@
 # Zineps — Website Revamp
 
-A revamp of <https://www.zineps.com/>. Currently: header + hero + automate + why Zineps + shipping AI + partners + integrations + differentiation + FAQ + final CTA + footer.
+A revamp of <https://www.zineps.com/>. Currently: header + hero + partner rates + automate + why Zineps + shipping AI + partners + integrations + differentiation + FAQ + final CTA + footer.
 UI copy is English-first for now.
 
 ## Stack
@@ -35,6 +35,7 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`
 - `docs/shipping-ai-concept.md` — the AI product moment.
 - `docs/why-zineps-concept.md` — features, stats, and the mint closer cell.
 - `docs/automate-concept.md` — the e-commerce/B2B twin panels.
+- `docs/partner-rates-concept.md` — the buying-power pitch and stats.
 
 ## Layout
 
@@ -52,6 +53,7 @@ src/
 │   ├── ShippingAi.tsx       the AI product moment
 │   ├── WhyZineps.tsx        features, stats, mint closer cell
 │   ├── Automate.tsx         the e-commerce/B2B twin panels
+│   ├── PartnerRates.tsx     the buying-power pitch and stats
 │   ├── Footer.tsx           the footer (closing CTA + links + wordmark)
 │   ├── ZinepsLogo.tsx
 │   └── icons.tsx

@@ -5,6 +5,7 @@ import { FinalCta } from "@/components/FinalCta";
 import { Hero } from "@/components/Hero";
 import { Integrations } from "@/components/Integrations";
 import { Partners } from "@/components/Partners";
+import { PartnerRates } from "@/components/PartnerRates";
 import { ShippingAi } from "@/components/ShippingAi";
 import { WhyZineps } from "@/components/WhyZineps";
 
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <PartnerRates />
       <Automate />
       <WhyZineps />
       <ShippingAi />
