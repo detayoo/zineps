@@ -89,10 +89,10 @@ export function Faq() {
               return (
                 <li
                   key={faq.question}
-                  className={`rounded-none border-l-2 border-l-accent-strong transition-colors duration-200 ${
+                  className={`rounded-none border-l-2 transition-colors duration-200 ${
                     isOpen
-                      ? "bg-accent-soft"
-                      : "bg-background hover:bg-accent-soft/60"
+                      ? "border-l-accent-strong bg-accent-soft"
+                      : "border-l-transparent bg-background hover:bg-accent-soft/60"
                   }`}
                 >
                   <button
