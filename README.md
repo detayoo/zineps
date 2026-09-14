@@ -1,6 +1,6 @@
 # Zineps — Website Revamp
 
-A revamp of <https://www.zineps.com/>. Starting with the header.
+A revamp of <https://www.zineps.com/>. Currently: header + hero.
 UI copy is English-first for now.
 
 ## Stack
@@ -25,6 +25,7 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`
   site. Source of truth for content.
 - `docs/header-concept.md` — the header concept ("The Masthead"), anatomy,
   states, motion, responsive rules, a11y and the file map.
+- `docs/hero-concept.md` — the hero concept, copy decisions, motion and a11y.
 
 ## Layout
 
@@ -33,6 +34,7 @@ src/
 ├── app/                     layout + demo page (the header's stage)
 ├── components/
 │   ├── Header/              the header (see below)
+│   ├── Hero.tsx             the homepage hero
 │   ├── ZinepsLogo.tsx
 │   └── icons.tsx
 └── lib/nav.ts               nav + language data

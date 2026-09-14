@@ -187,4 +187,4 @@ src/components/Header/
 
 - The announcement strip (the site's "We've closed our post-seed round. Read
   more →") is the natural addition above the bar.
-- Hero and logo marquee follow.
+- Logo marquee follows. The hero is done (`docs/hero-concept.md`).
