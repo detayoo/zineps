@@ -1,3 +1,4 @@
+import { Automate } from "@/components/Automate";
 import { Differentiation } from "@/components/Differentiation";
 import { Faq } from "@/components/Faq";
 import { FinalCta } from "@/components/FinalCta";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <Automate />
       <WhyZineps />
       <ShippingAi />
       <Partners />
