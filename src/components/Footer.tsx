@@ -65,8 +65,13 @@ export function Footer() {
           whileInView={reveal}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="flex flex-col items-center py-20 text-center md:py-16"
+          className="relative flex flex-col items-center overflow-hidden py-20 text-center md:py-16"
         >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,rgb(var(--border))_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_65%_70%_at_50%_40%,black,transparent)]"
+          />
+          <div className="relative flex flex-col items-center">
           <p className="inline-flex items-center gap-2 rounded border border-border bg-accent-soft px-3 py-1.5 text-[13px] font-semibold text-accent-strong">
             <span
               aria-hidden="true"
@@ -102,6 +107,7 @@ export function Footer() {
               Talk to sales
             </Link>
           </div>
+          </div>
         </motion.div>
 
         <motion.nav
@@ -136,7 +142,7 @@ export function Footer() {
         <div className="flex items-center justify-between gap-4 border-t border-border py-6 sm:flex-col sm:items-start">
           <p className="flex items-center gap-3 text-[13.5px] text-muted-foreground">
             <ZinepsLogo className="h-[18px] w-auto text-foreground" />
-            © 2025 Zineps.
+            © {new Date().getFullYear()} Zineps.
           </p>
           <p className="flex items-center gap-5 text-[13.5px]">
             <Link
