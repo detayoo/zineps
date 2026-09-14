@@ -46,16 +46,10 @@ function StatRow({
       transition={{ duration: 0.6, ease: EASE }}
       className="group flex flex-col gap-2 bg-background p-8"
     >
-      <dt className="order-3 text-[15px] text-muted-foreground transition-colors duration-200 group-hover:text-accent-strong">
-        {label}
-      </dt>
+      <dt className="order-3 text-[15px] text-muted-foreground">{label}</dt>
       <dd className="order-1 origin-bottom-left text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground transition-transform duration-300 motion-safe:group-hover:-rotate-2">
         {format(target)}
       </dd>
-      <span
-        aria-hidden="true"
-        className="order-2 mt-1 h-[3px] w-16 origin-left scale-x-0 bg-accent-strong transition-transform duration-300 motion-safe:group-hover:scale-x-100"
-      />
     </motion.div>
   );
 }
