@@ -15,12 +15,12 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
-const listVariants = {
+const listMotion = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.045, delayChildren: 0.06 } },
 };
 
-const itemVariants = {
+const itemMotion = {
   hidden: { opacity: 0, y: 12 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: EASE } },
 };
@@ -81,7 +81,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           transition={{ duration: 0.28, ease: EASE }}
           className="fixed inset-0 z-[200] hidden flex-col bg-background lg:flex"
         >
-          <div className="flex items-center justify-between px-5 py-4">
+          <div className="flex h-16 items-center justify-between border-b border-border px-6">
             <Link href="/" onClick={onClose} aria-label="Zineps home">
               <ZinepsLogo className="h-[22px] w-auto" />
             </Link>
@@ -97,14 +97,14 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           </div>
 
           <motion.nav
-            variants={listVariants}
+            variants={listMotion}
             initial="hidden"
             animate="visible"
             className="flex-1 overflow-y-auto px-5 pb-8 pt-4"
           >
             <ul className="flex flex-col gap-1">
               {primaryNav.map((item) => (
-                <motion.li key={item.label} variants={itemVariants}>
+                <motion.li key={item.label} variants={itemMotion}>
                   {item.children ? (
                     <div>
                       <button
@@ -167,7 +167,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
             </ul>
 
             <motion.div
-              variants={itemVariants}
+              variants={itemMotion}
               className="mt-8 flex flex-wrap gap-2"
             >
               {languages.map((language) => (
@@ -182,7 +182,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
               ))}
             </motion.div>
 
-            <motion.div variants={itemVariants} className="mt-6">
+            <motion.div variants={itemMotion} className="mt-6">
               <Link
                 href={authLinks.signIn}
                 onClick={onClose}

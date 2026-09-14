@@ -31,10 +31,9 @@ writing copy. The design language is defined by the tokens in
    text to the brand accent on hover. Respect `prefers-reduced-motion`.
 5. **Desktop-first breakpoints.** Every breakpoint except `2xl` is a max-width
    override. Write base (desktop) styles first, then override downward.
-6. **Variant architecture for sections.** Anything that differs structurally per
-   theme gets `ComponentName/index.tsx` + `variants/ComponentNameVariantN.tsx`.
-   Ternaries are for small style/visibility tweaks only. The `variant` union is
-   always `"one" | "two" | "three" | "four"`; the resolver falls back to `one`.
+6. **One header, no variant system.** There is a single `Header`. Do not
+   introduce `variants/` folders or a resolver — add one only when a second
+   design genuinely exists.
 7. **Interactive primitives own their own state.** Dropdowns, the language
    picker and the mobile overlay are self-contained components. `useHeader` holds
    only page-level state (scroll, overlay visibility, scroll lock).

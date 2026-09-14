@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 /**
- * Header state shared by every header variant.
- * Variants stay pure markup; all behaviour lives here.
+ * Page-level header state: scroll position and the mobile overlay.
+ * Interactive primitives keep their own local state.
  */
 export function useHeader() {
   const [scrolled, setScrolled] = useState(false);

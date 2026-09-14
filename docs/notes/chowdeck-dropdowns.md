@@ -1,7 +1,7 @@
 # Notes — Chowdeck dropdowns
 
 Inspiration pass on <https://chowdeck.com> (2026-09-14). **Observations only — no
-implementation.** Reference for a future header variant.
+implementation.** Reference for a future header direction.
 
 ## What's there
 
@@ -111,4 +111,4 @@ zig-zags. Reads as designed, not as a default list.
 Ours is the opposite philosophy: flush rows inside a borderless panel, one
 radius (4px), one shared hover (`bg-muted`), soft shadow. Chowdeck is pills,
 large radii (`rounded-full` / `rounded-2xl`), per-item colour, unroll motion.
-Worth keeping both in mind as a future variant — not a replacement.
+Worth keeping both in mind for a future direction — not a replacement.

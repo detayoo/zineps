@@ -23,7 +23,7 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`
 
 - `docs/zineps-content.md` — all site copy, nav and brand captured from the live
   site. Source of truth for content.
-- `docs/header-concept.md` — the header concept ("The Capsule"), anatomy,
+- `docs/header-concept.md` — the header concept ("The Masthead"), anatomy,
   states, motion, responsive rules, a11y and the file map.
 
 ## Layout
@@ -32,24 +32,23 @@ Other scripts: `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`
 src/
 ├── app/                     layout + demo page (the header's stage)
 ├── components/
-│   ├── Header/              variant architecture (see below)
+│   ├── Header/              the header (see below)
 │   ├── ZinepsLogo.tsx
 │   └── icons.tsx
 └── lib/nav.ts               nav + language data
-docs/                        content reference + header concept
+docs/                        content reference + header concept + notes
 ```
 
-### Header variants
-
-The header follows the variant architecture used across these projects:
+### Header
 
 ```
 Header/
-├── index.tsx                resolver — falls back to "one"
-├── useHeader.ts             shared state
-└── variants/
-    └── HeaderVariantOne.tsx "The Capsule"
+├── index.tsx                the header — "The Masthead"
+├── useHeader.ts             shared state (scroll, mobile menu)
+├── motion.ts                house ease + dropdown unroll (+ reduced motion)
+├── HeaderDropdown.tsx       nav group disclosure
+├── LanguageSwitcher.tsx     language picker
+└── MobileMenu.tsx           full-screen overlay
 ```
 
-Add a new variant as `variants/HeaderVariantTwo.tsx` and register it in
-`index.tsx`. Never branch a large block of header JSX with a ternary.
+One brand, one header — no variant system.
