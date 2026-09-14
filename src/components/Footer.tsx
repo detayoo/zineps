@@ -12,6 +12,12 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
+/**
+ * Marker-swipe hover: a mint block wipes in behind the text
+ * (`background-size 0% → 100%`) and the label flips to ink for contrast.
+ */
+const markerLinkClass = `box-decoration-clone -mx-1 bg-[linear-gradient(rgb(var(--accent)),rgb(var(--accent)))] bg-[length:0%_100%] bg-no-repeat px-1 transition-[background-size,color] duration-200 hover:bg-[length:100%_100%] hover:text-accent-ink ${focusRing}`;
+
 const columns = [
   {
     heading: "Products",
@@ -128,7 +134,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className={`text-[14.5px] text-foreground/80 transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
+                      className={`${markerLinkClass} text-[14.5px] text-foreground/80`}
                     >
                       {link.label}
                     </Link>
@@ -147,13 +153,13 @@ export function Footer() {
           <p className="flex items-center gap-5 text-[13.5px]">
             <Link
               href="/privacy-policy"
-              className={`text-muted-foreground transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
+              className={`${markerLinkClass} text-muted-foreground`}
             >
               Privacy policy
             </Link>
             <Link
               href="/terms"
-              className={`text-muted-foreground transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
+              className={`${markerLinkClass} text-muted-foreground`}
             >
               Terms
             </Link>

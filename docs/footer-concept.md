@@ -16,7 +16,9 @@ the page. All copy is the captured zineps reference, English-first.
 - **Ruled sections** — hairline dividers between CTA, link columns, and legal
   row, matching the masthead's ruled language.
 - **Link columns** — Products / Company / Contact, straight from the reference
-  footer, plus a © line with the dynamic year and privacy/terms links.
+  footer, plus a © line with the dynamic year and privacy/terms links. Link
+  hover is a mint marker-swipe: the block wipes in behind the label
+  (`background-size 0% → 100%`) and the text flips to ink.
 - **Ghost wordmark** — `zineps` lowercase at `clamp(4rem, 18vw, 17rem)` in
   `foreground/10`, cropped at the fold. Ramblings renders its wordmark the same
   way; ours uses Manrope extrabold instead of the logo SVG.
