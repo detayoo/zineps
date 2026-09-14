@@ -4,6 +4,8 @@ import type { SVGProps } from "react";
  * Zineps wordmark + mark.
  * The wordmark inherits `currentColor` so it adapts to light/dark;
  * the mark keeps the brand mint token.
+ *
+ * Decorative by default — the surrounding link supplies the accessible name.
  */
 export function ZinepsLogo(props: SVGProps<SVGSVGElement>) {
   return (
@@ -11,8 +13,8 @@ export function ZinepsLogo(props: SVGProps<SVGSVGElement>) {
       viewBox="0 0 101 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label="Zineps"
+      aria-hidden="true"
+      focusable="false"
       {...props}
     >
       <g fill="currentColor">

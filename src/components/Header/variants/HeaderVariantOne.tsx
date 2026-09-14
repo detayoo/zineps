@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -27,6 +28,7 @@ const ctaClass =
  */
 export function HeaderVariantOne() {
   const { scrolled, mobileOpen, setMobileOpen } = useHeader();
+  const closeMobile = useCallback(() => setMobileOpen(false), [setMobileOpen]);
 
   return (
     <>
@@ -86,7 +88,7 @@ export function HeaderVariantOne() {
         </div>
       </motion.header>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileMenu open={mobileOpen} onClose={closeMobile} />
     </>
   );
 }
