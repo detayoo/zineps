@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Zineps brand tokens.
+ * Raw brand values live only here, as space-separated RGB channels so Tailwind
+ * can apply opacity modifiers (e.g. `bg-background/80`).
+ * Mint is the brand accent; deep teal is its high-contrast counterpart.
+ */
+:root {
+  --background: 255 255 255;
+  --foreground: 11 18 16;
+  --muted: 243 247 246;
+  --muted-foreground: 90 107 102;
+  --border: 226 235 232;
+  --accent: 112 202 185;
+  --accent-strong: 15 127 117;
+  --accent-soft: 230 250 245;
+  --accent-ink: 18 58 52;
+}
+
+.dark {
+  --background: 7 16 14;
+  --foreground: 242 247 245;
+  --muted: 16 26 24;
+  --muted-foreground: 157 176 170;
+  --border: 29 42 39;
+  --accent: 112 202 185;
+  --accent-strong: 143 224 208;
+  --accent-soft: 15 36 32;
+  --accent-ink: 215 240 234;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--border));
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent));
+    color: rgb(var(--accent-ink));
+  }
+}
