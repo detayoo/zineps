@@ -60,7 +60,7 @@ export function Faq() {
       aria-labelledby="faq-heading"
       className="border-t border-border bg-background"
     >
-      <div className="mx-auto grid w-full max-w-[1200px] grid-cols-12 gap-10 px-6 py-24 md:py-20">
+      <div className="mx-auto grid w-full max-w-[1200px] grid-cols-12 gap-10 px-6 py-24 md:py-20 lg:gap-x-0">
         <div className="col-span-4 lg:col-span-full">
           <div className="lg:sticky lg:top-24">
             <h2

@@ -58,7 +58,7 @@ export function Partners() {
       aria-labelledby="partners-heading"
       className="border-t border-border bg-background"
     >
-      <div className="mx-auto grid w-full max-w-[1200px] grid-cols-12 gap-10 px-6 py-24 md:py-20">
+      <div className="mx-auto grid w-full max-w-[1200px] grid-cols-12 gap-10 px-6 py-24 md:py-20 lg:gap-x-0">
         <motion.div
           initial={initial}
           whileInView={{ opacity: 1, y: 0 }}
