@@ -11,6 +11,14 @@ nothing fake is claimed.
 - `robots`: index + follow, large image previews, unlimited snippets.
 - `viewport`: ink `themeColor`, device width, zoom left enabled.
 
+## Site URL
+
+- Single source in `src/lib/site.ts`: `NEXT_PUBLIC_SITE_URL`, falling back
+  to the live revamp URL. Canonical, OG, sitemap, robots, and JSON-LD all
+  read from it — set the env per deployment, never hardcode a domain.
+- `NEXT_PUBLIC_*` inlines at build time: adding or changing the env in
+  Vercel needs a redeploy to take effect.
+
 ## Crawlers & platforms
 
 - `src/app/robots.ts` → `/robots.txt` (allow all, points at the sitemap).

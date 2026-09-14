@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { SITE_URL } from "@/lib/site";
 
 import "./globals.css";
 
@@ -12,7 +13,6 @@ const manrope = Manrope({
   display: "swap",
 });
 
-const SITE_URL = "https://zineps-rose.vercel.app";
 const SITE_NAME = "Zineps";
 const SITE_TITLE = "Zineps — The intelligent layer for logistics";
 const SITE_DESCRIPTION =
