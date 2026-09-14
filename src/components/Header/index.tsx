@@ -15,7 +15,7 @@ import { EASE } from "./motion";
 import { useHeader } from "./useHeader";
 
 const navLinkClass =
-  "flex h-full items-center px-3.5 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
+  "flex h-full items-center px-3.5 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-accent-soft hover:text-accent-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
 
 const iconButtonClass =
   "flex h-full items-center px-6 text-foreground transition-colors duration-200 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";

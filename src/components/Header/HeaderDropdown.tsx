@@ -14,7 +14,7 @@ import {
 } from "./motion";
 
 const triggerClass =
-  "flex h-full items-center gap-1.5 rounded px-3.5 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
+  "flex h-full items-center gap-1.5 rounded px-3.5 text-[15px] text-foreground/80 transition-colors duration-200 hover:bg-accent-soft hover:text-accent-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent-strong/40";
 
 /**
  * A single nav group ("Products", "Knowledge Base").

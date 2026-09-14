@@ -115,7 +115,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                             value === item.label ? null : item.label,
                           )
                         }
-                        className="flex w-full items-center justify-between rounded px-3 py-3.5 text-left text-[22px] font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
+                        className="flex w-full items-center justify-between rounded px-3 py-3.5 text-left text-[22px] font-medium text-foreground transition-colors hover:bg-accent-soft hover:text-accent-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40"
                       >
                         {item.label}
                         <ChevronDownIcon
@@ -157,7 +157,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
                     <Link
                       href={item.href}
                       onClick={onClose}
-                      className="block rounded px-3 py-3.5 text-[22px] font-medium text-foreground transition-colors hover:bg-muted"
+                      className="block rounded px-3 py-3.5 text-[22px] font-medium text-foreground transition-colors hover:bg-accent-soft hover:text-accent-ink"
                     >
                       {item.label}
                     </Link>

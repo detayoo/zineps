@@ -79,7 +79,7 @@ white-on-white pills otherwise blend into the page. At rest each pill border is
 |-------|---------|--------|
 | **Resting** | top of page | bottom `border-border` is already on; `bg-background/50` + `backdrop-blur-sm` |
 | **Scrolled** | `scrollY > 12` | same bottom border, fill firms to `bg-background/85` + `backdrop-blur-xl` |
-| **Nav hover** | pointer over a nav row | row fills the full bar height, `bg-muted` |
+| **Nav hover** | pointer over a nav row | row fills the full bar height, `accent-soft` fill with `accent-ink` text |
 | **Dropdown open** | hover / click / focus | panel unrolls from the top (`scaleY 0 → 1`); pills fade in |
 | **Pill hover** | pointer over a pill | solid `accent-strong` fill, text → `background`, `1.02` scale |
 | **Mobile open** | hamburger | full-screen overlay, items stagger in |
@@ -141,12 +141,12 @@ so opacity modifiers work.
 |-------|-------|------|
 | `--background` | `#FFFFFF` | bar surface, pill fill |
 | `--foreground` | `#0B1210` | text, logo |
-| `--muted` | `#F3F7F6` | nav row hover |
+| `--muted` | `#F3F7F6` | subtle neutral fills |
 | `--muted-foreground` | `#5A6B66` | secondary text |
 | `--border` | `#E2EBE8` | rules, pill borders |
 | `--accent` | `#70CAB9` | CTA block, logo mark, active language |
 | `--accent-strong` | `#0F7F75` | pill hover fill, badges, focus ring |
-| `--accent-soft` | `#E6FAF5` | badge surfaces |
+| `--accent-soft` | `#E6FAF5` | nav hover fill, badge surfaces |
 | `--accent-ink` | `#123A34` | text on mint |
 
 Dark-mode values live in `.dark`; components never branch on `dark:` — the
