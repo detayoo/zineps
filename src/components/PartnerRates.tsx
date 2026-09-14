@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { animate, motion, useReducedMotion } from "framer-motion";
 
 /** House ease — the same curve the rest of the page uses. */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -38,24 +38,29 @@ function StatRow({
   label: string;
 }) {
   const reduce = useReducedMotion();
-  const [rolling, setRolling] = useState(false);
-  const [tick, setTick] = useState(0);
+  const [spin, setSpin] = useState(0);
+  const controlsRef = useRef<ReturnType<typeof animate> | null>(null);
 
-  useEffect(() => {
-    if (!rolling || reduce) return;
-    const id = setInterval(() => setTick((t) => t + 1), 70);
-    return () => clearInterval(id);
-  }, [rolling, reduce]);
+  useEffect(() => () => controlsRef.current?.stop(), []);
+
+  const startRoll = () => {
+    if (reduce) return;
+    controlsRef.current?.stop();
+    controlsRef.current = animate(0, 10, {
+      duration: 0.7,
+      ease: EASE,
+      onUpdate: (latest) => setSpin(latest),
+      onComplete: () => setSpin(0),
+    });
+  };
+  const stopRoll = () => {
+    controlsRef.current?.stop();
+    setSpin(0);
+  };
 
   const shown = format(target).replace(/\d/g, (digit) =>
-    rolling && !reduce ? String((Number(digit) + tick) % 10) : digit,
+    String((Number(digit) + Math.floor(spin)) % 10),
   );
-
-  const setRoll = (next: boolean) => {
-    if (reduce) return;
-    setTick(0);
-    setRolling(next);
-  };
 
   return (
     <motion.div
@@ -63,8 +68,8 @@ function StatRow({
       initial={reduce ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
-      onMouseEnter={() => setRoll(true)}
-      onMouseLeave={() => setRoll(false)}
+      onMouseEnter={startRoll}
+      onMouseLeave={stopRoll}
       className="flex flex-col gap-2 bg-background p-8"
     >
       <dt className="order-2 text-[15px] text-muted-foreground">{label}</dt>

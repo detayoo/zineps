@@ -22,10 +22,10 @@ one dashboard. CTAs: "Start free" → the source's shipping signup URL ·
 ## Motion
 
 Scroll reveals only: `opacity 0 → 1`, `y 32 → 0`, `600ms`, house ease.
-Numbers render at final value — no count-up. Hovering a stat rolls its
-digits forward odometer-style until the pointer leaves, then it snaps home
-— pointer-only delight; keyboard and touch readers get the same static
-numbers. Reduced motion renders final values statically with no roll.
+Numbers render at final value — no count-up. Hovering a stat spins each
+digit through exactly one odometer revolution (`0 → 10` over `700ms` on the
+house ease) and lands home; leaving mid-spin snaps back. Reduced motion
+renders final values statically with no roll.
 
 ## Accessibility
 
