@@ -12,12 +12,6 @@ const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
-/**
- * Marker-swipe hover: a mint block wipes in behind the text
- * (`background-size 0% → 100%`) and the label flips to ink for contrast.
- */
-const markerLinkClass = `box-decoration-clone -mx-1 bg-[linear-gradient(rgb(var(--accent)),rgb(var(--accent)))] bg-[length:0%_100%] bg-no-repeat px-1 transition-[background-size,color] duration-200 hover:bg-[length:100%_100%] hover:text-accent-ink ${focusRing}`;
-
 const columns = [
   {
     heading: "Products",
@@ -88,7 +82,7 @@ export function Footer() {
 
           <h2 className="mt-6 max-w-[720px] text-balance text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-foreground md:text-[32px] sm:text-[28px]">
             Software, network and intelligence,{" "}
-            <span className="text-muted-foreground">
+            <span className="box-decoration-clone bg-accent px-2 text-accent-ink">
               start where you are.
             </span>
           </h2>
@@ -134,7 +128,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className={`${markerLinkClass} text-[14.5px] text-foreground/80`}
+                      className={`text-[14.5px] text-foreground/80 transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
                     >
                       {link.label}
                     </Link>
@@ -153,13 +147,13 @@ export function Footer() {
           <p className="flex items-center gap-5 text-[13.5px]">
             <Link
               href="/privacy-policy"
-              className={`${markerLinkClass} text-muted-foreground`}
+              className={`text-muted-foreground transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
             >
               Privacy policy
             </Link>
             <Link
               href="/terms"
-              className={`${markerLinkClass} text-muted-foreground`}
+              className={`text-muted-foreground transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
             >
               Terms
             </Link>
