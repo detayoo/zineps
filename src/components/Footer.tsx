@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { ZinepsLogo } from "@/components/ZinepsLogo";
 import { authLinks } from "@/lib/nav";
@@ -57,6 +57,16 @@ export function Footer() {
   const initial = reduce ? false : { opacity: 0, y: 24 };
   const reveal = { opacity: 1, y: 0 };
 
+  const sentence = "start where you are.";
+  const letterContainer: Variants = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.035, delayChildren: 0.4 } },
+  };
+  const letter: Variants = {
+    hidden: { opacity: 0, y: reduce ? 0 : 5 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.22 } },
+  };
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="mx-auto w-full max-w-[1440px] px-6">
@@ -98,7 +108,23 @@ export function Footer() {
                 transition={{ duration: 0.5, ease: EASE, delay: 0.3 }}
                 className="relative inline-block origin-left bg-accent px-2 text-accent-ink box-decoration-clone"
               >
-                start where you are.
+                <motion.span
+                  variants={letterContainer}
+                  initial={reduce ? false : "hidden"}
+                  whileInView="show"
+                  viewport={{ once: true }}
+                  className="inline-block"
+                >
+                  {sentence.split("").map((char, index) => (
+                    <motion.span
+                      key={`${char}-${index}`}
+                      variants={letter}
+                      className="inline-block"
+                    >
+                      {char === " " ? " " : char}
+                    </motion.span>
+                  ))}
+                </motion.span>
               </motion.span>
             </span>
           </h2>
