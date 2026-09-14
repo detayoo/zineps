@@ -15,12 +15,12 @@ the right.
 
 - 12-col grid: heading spans 4 (sticky below the masthead), accordion spans 8;
   single column below `lg`.
-- Rows are hairline-divided with tabular `01–06` numerals; the plus rotates
-  `45°` into a close mark and picks up the accent when open.
+- Each item is one sharp callout holding both its question and its answer,
+  in the x-ta `Callout` manner: a `2px` accent edge, a faint mint fill, zero
+  radius (`rounded-none` — the one place sharp is the point). Question row on
+  top with tabular numerals and a plus that rotates `45°` open; answer
+  unfolding inside the same box.
 - First item open by default so the section never reads empty.
-- Answers render as callouts in the x-ta `Callout` manner: a `2px` left accent
-  border in `accent-strong` over an `accent-soft` fill, ink text — the answer
-  reads as the explanation to the question above it.
 
 ## Motion
 

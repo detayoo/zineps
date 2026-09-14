@@ -46,8 +46,9 @@ const faqs = [
 ] as const;
 
 /**
- * Frequently asked questions — sticky heading on the left, numbered
- * accordion on the right. First item open by default.
+ * Frequently asked questions — each item is one sharp callout holding both
+ * its question and its answer, in the x-ta `Callout` manner: a 2px accent
+ * edge, a faint mint fill, zero radius. First item open by default.
  */
 export function Faq() {
   const reduce = useReducedMotion();
@@ -82,27 +83,30 @@ export function Faq() {
         </div>
 
         <div className="col-span-8 lg:col-span-full">
-          <ul className="border-t border-border">
+          <ul className="flex flex-col gap-3">
             {faqs.map((faq, index) => {
               const isOpen = open === index;
               return (
-                <li key={faq.question} className="border-b border-border">
+                <li
+                  key={faq.question}
+                  className="rounded-none border-l-2 border-l-accent-strong bg-accent-soft/60 transition-colors duration-200 hover:bg-accent-soft"
+                >
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     aria-controls={`${panelId}-${index}`}
                     onClick={() => setOpen(isOpen ? null : index)}
-                    className={`flex w-full items-center gap-5 py-5 text-left transition-colors duration-200 hover:bg-accent-soft/60 ${focusRing} rounded`}
+                    className={`flex w-full items-center gap-4 px-5 py-4 text-left ${focusRing}`}
                   >
-                    <span className="w-8 shrink-0 text-[13px] font-semibold tabular-nums text-muted-foreground">
+                    <span className="w-8 shrink-0 text-[13px] font-semibold tabular-nums text-accent-strong">
                       {String(index + 1).padStart(2, "0")}
                     </span>
-                    <span className="flex-1 text-[16.5px] font-medium text-foreground">
+                    <span className="flex-1 text-[16.5px] font-semibold text-foreground">
                       {faq.question}
                     </span>
                     <PlusIcon
-                      className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${
-                        isOpen ? "rotate-45 text-accent-strong" : ""
+                      className={`h-5 w-5 shrink-0 text-accent-strong transition-transform duration-300 ${
+                        isOpen ? "rotate-45" : ""
                       }`}
                     />
                   </button>
@@ -116,11 +120,9 @@ export function Faq() {
                         transition={{ duration: 0.28, ease: EASE }}
                         className="overflow-hidden"
                       >
-                        <div className="mb-6 ml-[52px] mr-4 rounded border-l-2 border-accent-strong bg-accent-soft px-5 py-4">
-                          <p className="max-w-[62ch] text-[15px] leading-relaxed text-accent-ink">
-                            {faq.answer}
-                          </p>
-                        </div>
+                        <p className="max-w-[62ch] px-5 pb-5 pl-[68px] text-[15px] leading-relaxed text-accent-ink">
+                          {faq.answer}
+                        </p>
                       </motion.div>
                     )}
                   </AnimatePresence>
