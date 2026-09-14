@@ -5,11 +5,13 @@ import { Hero } from "@/components/Hero";
 import { Integrations } from "@/components/Integrations";
 import { Partners } from "@/components/Partners";
 import { ShippingAi } from "@/components/ShippingAi";
+import { WhyZineps } from "@/components/WhyZineps";
 
 export default function Home() {
   return (
     <main>
       <Hero />
+      <WhyZineps />
       <ShippingAi />
       <Partners />
       <Integrations />
