@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Zineps — The intelligent layer for logistics",
   description:
     "AI shipping software for e-commerce and logistics. One infrastructure with a dashboard and an API, using partner shipping rates or your own contracts.",
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
