@@ -20,11 +20,12 @@ Masthead” on the same wide rail.
   `foreground`); no new colors, no shadows.
 - **Route** — one accent stroke draws from `pathLength 0 → 1` across scroll
   progress `0.2 → 0.8`, with origin/destination nodes and city labels.
-- **The van** — a flat token-built delivery van (white body, mint cargo door,
-  spoked wheels) that rides the route. Position comes from the path geometry
-  itself (`getPointAtLength`), heading from the tangent, wheel spin from
-  travelled distance — so it can never detach from the line. Updates write
-  straight to the DOM transform, no re-renders per scroll frame.
+- **The van** — a flat token-built box van: white cargo box with the wordmark
+  and a mint stripe, glazed cab with mirror and headlight, big spoked wheels.
+  It rides the route with position from the path geometry itself
+  (`getPointAtLength`), heading from the tangent, wheel spin from travelled
+  distance — so it can never detach from the line. Updates write straight to
+  the DOM transform, no re-renders per scroll frame.
 - **Promise block** — eyebrow tag, H1 kept close to the source, compressed
   subcopy, verb-first CTAs (`Start shipping`, `Explore the partner platform`),
   and a microcopy line that doubles as the scroll cue.

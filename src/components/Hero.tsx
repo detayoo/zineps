@@ -21,10 +21,10 @@ const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
 
 const WHEEL_BASE: Array<[number, number]> = [
-  [-16, -6],
-  [16, -6],
+  [-36, -14],
+  [36, -14],
 ];
-const WHEEL_RADIUS = 6;
+const WHEEL_RADIUS = 14;
 
 /**
  * Drive the van along the route path. Reads the path geometry directly, so the
@@ -194,30 +194,67 @@ export function Hero() {
             />
             <g ref={vanRef} transform="translate(18 332)">
               <rect
-                x={-30}
-                y={-32}
-                width={60}
-                height={24}
-                rx={4}
+                x={-64}
+                y={-70}
+                width={64}
+                height={46}
+                rx={6}
                 fill="rgb(var(--background))"
                 stroke="rgb(var(--foreground))"
-                strokeWidth={2.5}
+                strokeWidth={3}
               />
+              <text
+                x={-57}
+                y={-40}
+                fontSize={12.5}
+                fontWeight={800}
+                letterSpacing={1.5}
+                fill="rgb(var(--foreground))"
+              >
+                zineps
+              </text>
               <rect
-                x={-24}
-                y={-28}
-                width={12}
+                x={-58}
+                y={-33}
+                width={52}
                 height={8}
                 rx={2}
+                fill="rgb(var(--accent))"
+              />
+              <path
+                d="M0 -66 L28 -66 L50 -30 L57 -30 L57 -22 L0 -22 Z"
+                fill="rgb(var(--background))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={3}
+                strokeLinejoin="round"
+              />
+              <path
+                d="M9 -59 L25 -59 L39 -33 L9 -33 Z"
                 fill="rgb(var(--accent-strong))"
               />
+              <line
+                x1={40}
+                y1={-54}
+                x2={46}
+                y2={-50}
+                stroke="rgb(var(--foreground))"
+                strokeWidth={2}
+              />
+              <circle
+                cx={47.5}
+                cy={-49}
+                r={2.5}
+                fill="rgb(var(--foreground))"
+              />
               <rect
-                x={6}
-                y={-28}
-                width={16}
-                height={16}
+                x={51}
+                y={-31}
+                width={6}
+                height={6}
                 rx={2}
                 fill="rgb(var(--accent))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={1.5}
               />
               {WHEEL_BASE.map(([cx, cy], index) => (
                 <g
@@ -227,24 +264,24 @@ export function Hero() {
                   }}
                   transform={`translate(${cx} ${cy})`}
                 >
-                  <circle r={6} fill="rgb(var(--foreground))" />
+                  <circle r={14} fill="rgb(var(--foreground))" />
                   <line
-                    x1={-3.5}
+                    x1={-8}
                     y1={0}
-                    x2={3.5}
+                    x2={8}
                     y2={0}
                     stroke="rgb(var(--background))"
-                    strokeWidth={1.6}
+                    strokeWidth={2.4}
                   />
                   <line
                     x1={0}
-                    y1={-3.5}
+                    y1={-8}
                     x2={0}
-                    y2={3.5}
+                    y2={8}
                     stroke="rgb(var(--background))"
-                    strokeWidth={1.6}
+                    strokeWidth={2.4}
                   />
-                  <circle r={1.4} fill="rgb(var(--background))" />
+                  <circle r={3} fill="rgb(var(--background))" />
                 </g>
               ))}
             </g>
