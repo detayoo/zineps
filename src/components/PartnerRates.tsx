@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { animate, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 /** House ease — the same curve the rest of the page uses. */
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -38,20 +38,8 @@ function StatRow({
   label: string;
 }) {
   const reduce = useReducedMotion();
-  const [started, setStarted] = useState(false);
-  const [value, setValue] = useState(reduce ? target : 0);
   const [rolling, setRolling] = useState(false);
   const [tick, setTick] = useState(0);
-
-  useEffect(() => {
-    if (!started || reduce) return;
-    const controls = animate(0, target, {
-      duration: 2,
-      ease: EASE,
-      onUpdate: (latest) => setValue(Math.round(latest)),
-    });
-    return () => controls.stop();
-  }, [started, reduce, target]);
 
   useEffect(() => {
     if (!rolling || reduce) return;
@@ -59,7 +47,7 @@ function StatRow({
     return () => clearInterval(id);
   }, [rolling, reduce]);
 
-  const shown = format(value).replace(/\d/g, (digit) =>
+  const shown = format(target).replace(/\d/g, (digit) =>
     rolling && !reduce ? String((Number(digit) + tick) % 10) : digit,
   );
 
@@ -71,7 +59,6 @@ function StatRow({
 
   return (
     <motion.div
-      onViewportEnter={() => setStarted(true)}
       viewport={{ once: true, margin: "-80px" }}
       initial={reduce ? false : { opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
