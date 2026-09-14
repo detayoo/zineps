@@ -23,8 +23,10 @@ one dashboard. CTAs: "Start free" → the source's shipping signup URL ·
 
 Scroll reveals only: `opacity 0 → 1`, `y 32 → 0`, `600ms`, house ease.
 Numbers always show their true value — no counting, no rolling. Hovering a
-stat lifts the number, wipes in a mint rule beneath it, and warms the label
-to accent (motion-gated). Reduced motion keeps the color change only.
+stat tilts the number `-2°` from the bottom-left (the differentiation ghosts
+do `-6°`; same gesture, smaller dose), wipes in a mint rule beneath it, and
+warms the label to accent — all motion-gated. Reduced motion keeps the color
+change only.
 
 ## Accessibility
 

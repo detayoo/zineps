@@ -49,7 +49,7 @@ function StatRow({
       <dt className="order-3 text-[15px] text-muted-foreground transition-colors duration-200 group-hover:text-accent-strong">
         {label}
       </dt>
-      <dd className="order-1 text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground transition-transform duration-300 motion-safe:group-hover:-translate-y-1">
+      <dd className="order-1 origin-bottom-left text-[clamp(2.75rem,6vw,5rem)] font-semibold leading-none tracking-[-0.03em] tabular-nums text-foreground transition-transform duration-300 motion-safe:group-hover:-rotate-2">
         {format(target)}
       </dd>
       <span
