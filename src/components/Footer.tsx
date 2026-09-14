@@ -1,0 +1,172 @@
+"use client";
+
+import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
+
+import { ZinepsLogo } from "@/components/ZinepsLogo";
+import { authLinks } from "@/lib/nav";
+
+/** House ease — the same curve the header and hero use. */
+const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-strong/40";
+
+const columns = [
+  {
+    heading: "Products",
+    links: [
+      { label: "Shipping for e-commerce and SMBs", href: "/shipping" },
+      {
+        label: "Logistics service provider platform",
+        href: "/logistics-operating-system",
+      },
+      { label: "Shipping AI", href: "/ai-shipping-intelligence" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About us", href: "/about-us" },
+      { label: "Blog", href: "/blog" },
+      { label: "Careers", href: "/careers" },
+      { label: "Privacy policy", href: "/privacy-policy" },
+      { label: "Terms", href: "/terms" },
+    ],
+  },
+  {
+    heading: "Contact",
+    links: [
+      { label: "info@zineps.com", href: "mailto:info@zineps.com" },
+      { label: "020 261 4474", href: "tel:0202614474" },
+      {
+        label: "Herikerbergweg 288, 1101CT Amsterdam",
+        href: "https://maps.google.com/?q=Herikerbergweg+288+Amsterdam",
+      },
+    ],
+  },
+] as const;
+
+/**
+ * The zineps footer — refurbished from the ramblings `SiteFooter` type:
+ * a centered closing CTA, a ruled link-columns block, a compact legal row,
+ * and a giant ghost wordmark to close the page.
+ */
+export function Footer() {
+  const reduce = useReducedMotion();
+  const initial = reduce ? false : { opacity: 0, y: 24 };
+  const reveal = { opacity: 1, y: 0 };
+
+  return (
+    <footer className="border-t border-border bg-background">
+      <div className="mx-auto w-full max-w-[1200px] px-6">
+        <motion.div
+          initial={initial}
+          whileInView={reveal}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="flex flex-col items-center py-20 text-center md:py-16"
+        >
+          <p className="inline-flex items-center gap-2 rounded border border-border bg-accent-soft px-3 py-1.5 text-[13px] font-semibold text-accent-strong">
+            <span
+              aria-hidden="true"
+              className="h-2 w-2 rounded-sm bg-accent-strong"
+            />
+            Start where you are
+          </p>
+
+          <h2 className="mt-6 max-w-[720px] text-balance text-[40px] font-semibold leading-[1.1] tracking-[-0.02em] text-foreground md:text-[32px] sm:text-[28px]">
+            Software, network and intelligence,{" "}
+            <span className="text-muted-foreground">
+              start where you are.
+            </span>
+          </h2>
+
+          <p className="mt-5 max-w-[560px] text-[15.5px] leading-relaxed text-muted-foreground">
+            Merchants start shipping in minutes, partner rates included.
+            Logistics partners digitize their offering and bring their
+            merchants along.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href={authLinks.signIn}
+              className={`inline-flex min-h-[44px] items-center rounded bg-accent px-6 text-[15px] font-semibold text-accent-ink transition-colors duration-200 hover:bg-accent-strong hover:text-background active:scale-[0.98] ${focusRing}`}
+            >
+              Start your trial
+            </Link>
+            <Link
+              href="/contact"
+              className={`inline-flex min-h-[44px] items-center rounded border border-border bg-background px-6 text-[15px] font-medium text-foreground transition-colors duration-200 hover:border-accent-strong hover:text-accent-strong ${focusRing}`}
+            >
+              Talk to sales
+            </Link>
+          </div>
+        </motion.div>
+
+        <motion.nav
+          aria-label="Footer"
+          initial={initial}
+          whileInView={reveal}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: EASE }}
+          className="grid grid-cols-3 gap-10 border-t border-border py-14 sm:grid-cols-1 sm:gap-8 sm:py-10"
+        >
+          {columns.map((column) => (
+            <div key={column.heading}>
+              <p className="text-[13px] font-semibold text-muted-foreground">
+                {column.heading}
+              </p>
+              <ul className="mt-4 flex flex-col gap-2.5">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className={`text-[14.5px] text-foreground/80 transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </motion.nav>
+
+        <div className="flex items-center justify-between gap-4 border-t border-border py-6 sm:flex-col sm:items-start">
+          <p className="flex items-center gap-3 text-[13.5px] text-muted-foreground">
+            <ZinepsLogo className="h-[18px] w-auto text-foreground" />
+            © 2025 Zineps.
+          </p>
+          <p className="flex items-center gap-5 text-[13.5px]">
+            <Link
+              href="/privacy-policy"
+              className={`text-muted-foreground transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
+            >
+              Privacy policy
+            </Link>
+            <Link
+              href="/terms"
+              className={`text-muted-foreground transition-colors duration-200 hover:text-accent-strong ${focusRing} rounded`}
+            >
+              Terms
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      <motion.div
+        aria-hidden="true"
+        initial={reduce ? false : { opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: EASE }}
+        className="overflow-hidden select-none"
+      >
+        <p className="-mb-[0.12em] text-center text-[clamp(4rem,18vw,17rem)] font-extrabold lowercase leading-[0.85] tracking-[-0.03em] text-foreground/10">
+          zineps
+        </p>
+      </motion.div>
+    </footer>
+  );
+}
