@@ -26,6 +26,12 @@ const WHEEL_BASE: Array<[number, number]> = [
 ];
 const WHEEL_RADIUS = 14;
 
+/** Single source for the shipment route — road, dashes, reveal mask and van.
+ *  Both ends sit inside the frame (clear of the viewport edges) so the parked
+ *  van is never half-clipped. */
+const ROUTE_D =
+  "M70 336 C 280 262, 520 370, 760 270 C 1000 170, 1200 250, 1370 192";
+
 /**
  * Drive the van along the route path, in screen pixels. The route SVG
  * stretches non-uniformly to fill its band, so positioning inside it would
@@ -64,7 +70,7 @@ function updateVan(
     ) *
       180) /
     Math.PI;
-  van.style.visibility = "visible";
+  van.style.visibility = clamped > 0.01 ? "visible" : "hidden";
   van.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
   const spin = (distance / WHEEL_RADIUS) * (180 / Math.PI);
   wheels.forEach((wheel, index) => {
@@ -80,7 +86,9 @@ function updateVan(
  * Immersive scroll hero: a pinned full-viewport logistics landscape.
  * Scrolling parallaxes the brand layers, draws the shipment route, and drives
  * a delivery van along it — origin to destination, wheels spinning, body
- * pitched to the road. The headline stays put; nothing fades on scroll.
+ * pitched to the road. A storefront marks the merchant origin, a warehouse
+ * the partner destination; parcels and a cloud drift overhead. The headline
+ * stays put; nothing fades on scroll.
  */
 export function Hero() {
   const reduce = useReducedMotion();
@@ -101,6 +109,7 @@ export function Hero() {
   const midHills = useTransform(scrollYProgress, [0, 1], ["0%", "-14%"]);
   const nearGround = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
   const routeDraw = useTransform(scrollYProgress, [0.2, 0.8], [0, 1]);
+  const cloudDrift = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
 
   // Stable placement helper for the mount/resize effect below.
   const placeVan = useCallback((progress: number) => {
@@ -155,6 +164,20 @@ export function Hero() {
             style={reduce ? undefined : { y: skyDrift }}
             className="absolute inset-x-0 top-0 h-[46svh] bg-gradient-to-b from-accent-soft to-transparent"
           />
+          <div aria-hidden="true" className="absolute inset-x-6 top-0 bottom-0 mx-auto max-w-[1100px] md:hidden">
+            <motion.div
+              style={reduce ? undefined : { y: cloudDrift }}
+              className="absolute right-[6%] top-[9%]"
+            >
+              <svg viewBox="0 0 140 64" className="block w-36">
+                <g fill="rgb(var(--background))" opacity={0.9}>
+                  <ellipse cx={36} cy={40} rx={28} ry={16} />
+                  <ellipse cx={66} cy={30} rx={26} ry={19} />
+                  <ellipse cx={94} cy={40} rx={24} ry={14} />
+                </g>
+              </svg>
+            </motion.div>
+          </div>
           <motion.svg
             style={reduce ? undefined : { y: farHills }}
             viewBox="0 0 1440 300"
@@ -181,7 +204,7 @@ export function Hero() {
           </motion.svg>
           <div
             ref={bandRef}
-            className="absolute inset-x-0 top-[30svh] h-[34svh]"
+            className="absolute inset-x-6 top-[34svh] mx-auto h-[34svh] max-w-[1100px]"
           >
           <motion.svg
             viewBox="0 0 1440 420"
@@ -189,51 +212,234 @@ export function Hero() {
             aria-hidden="true"
             className="absolute inset-0 h-full w-full"
           >
-            <motion.path
-              ref={pathRef}
-              d="M-20 340 C 280 260, 520 370, 760 270 C 1000 170, 1220 250, 1460 190"
+            <defs>
+              <mask
+                id="zineps-route-reveal"
+                maskUnits="userSpaceOnUse"
+                x="0"
+                y="0"
+                width="1440"
+                height="420"
+              >
+                <rect x="0" y="0" width="1440" height="420" fill="black" />
+                <motion.path
+                  d={ROUTE_D}
+                  fill="none"
+                  stroke="white"
+                  strokeWidth={48}
+                  strokeLinecap="butt"
+                  style={{ pathLength: reduce ? 1 : routeDraw }}
+                />
+              </mask>
+            </defs>
+            <g mask="url(#zineps-route-reveal)">
+<path
+              d={ROUTE_D}
               fill="none"
-              stroke="rgb(var(--accent-strong))"
-              strokeWidth={6}
+              stroke="rgb(var(--accent))"
+              strokeOpacity={0.3}
+              strokeWidth={38}
               strokeLinecap="round"
-              style={{ pathLength: reduce ? 1 : routeDraw }}
+              className="sm:hidden"
             />
+            <path
+              ref={pathRef}
+              d={ROUTE_D}
+              fill="none"
+              stroke="rgb(var(--foreground))"
+              strokeWidth={24}
+              strokeLinecap="round"
+              className="sm:hidden"
+            />
+            <path
+              d={ROUTE_D}
+              fill="none"
+              stroke="rgb(var(--background))"
+              strokeWidth={3}
+              strokeLinecap="round"
+              strokeDasharray="16 14"
+              className="sm:hidden"
+            />
+            </g>
             <text
-              x={48}
-              y={312}
+              x={112}
+              y={330}
               fontSize={22}
               fill="rgb(var(--muted-foreground))"
+              className="sm:hidden"
             >
               Amsterdam
             </text>
-            <g aria-hidden="true" className="motion-safe:group-hover:opacity-100 opacity-0 transition-opacity duration-300" transform="translate(20, 240) scale(0.6)">
-              <path d="M10 80 L10 50 L20 35 L30 50 L30 80 Z" fill="rgb(var(--foreground))" opacity="0.6"/>
-              <rect x="16" y="50" width="8" height="30" fill="rgb(var(--foreground))" opacity="0.4"/>
-              <path d="M18 35 L25 25 L32 35" fill="rgb(var(--accent-strong))" opacity="0.8"/>
+            {/*
+              Preserved desktop storefront icon — hidden because it collided
+              with the CTA row after the pill gained mt-[50px]. Restore by
+              deleting these comment markers (keep the sm:hidden off it).
+            <g
+              aria-hidden="true"
+              transform="translate(54 288)"
+              className="sm:hidden"
+            >
+              <path
+                d="M-28 -18 L28 -18 L22 -32 L-22 -32 Z"
+                fill="rgb(var(--accent-strong))"
+              />
+              <rect
+                x="-24"
+                y="-18"
+                width="48"
+                height="32"
+                fill="rgb(var(--accent-soft))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={3}
+              />
+              <rect
+                x="8"
+                y="-12"
+                width="10"
+                height="10"
+                fill="rgb(var(--accent))"
+                fillOpacity={0.55}
+              />
+              <rect
+                x="-6"
+                y="-4"
+                width="12"
+                height="18"
+                fill="rgb(var(--foreground))"
+              />
             </g>
+            */}
             <text
-              x={1330}
+              x={1280}
               y={168}
               fontSize={22}
               fill="rgb(var(--muted-foreground))"
+              className="sm:hidden"
             >
               Berlin
             </text>
-            <g aria-hidden="true" className="motion-safe:group-hover:opacity-100 opacity-0 transition-opacity duration-300" transform="translate(1305, 100) scale(0.6)">
-              <path d="M10 80 L10 50 L20 35 L30 50 L30 80 Z" fill="rgb(var(--foreground))" opacity="0.6"/>
-              <rect x="16" y="50" width="8" height="30" fill="rgb(var(--foreground))" opacity="0.4"/>
-              <path d="M18 35 L25 25 L32 35" fill="rgb(var(--accent-strong))" opacity="0.8"/>
+            <g
+              aria-hidden="true"
+              transform="translate(1408 156)"
+              className="sm:hidden"
+            >
+              <rect
+                x="-30"
+                y="-28"
+                width="60"
+                height="8"
+                fill="rgb(var(--foreground))"
+              />
+              <rect
+                x="-26"
+                y="-20"
+                width="52"
+                height="36"
+                fill="rgb(var(--accent-soft))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={3}
+              />
+              <rect
+                x="-11"
+                y="-4"
+                width="22"
+                height="20"
+                fill="rgb(var(--background))"
+                stroke="rgb(var(--foreground))"
+                strokeWidth={2}
+              />
+              <line
+                x1={-11}
+                y1={3}
+                x2={11}
+                y2={3}
+                stroke="rgb(var(--foreground))"
+                strokeWidth={1.5}
+                opacity={0.6}
+              />
+              <line
+                x1={-11}
+                y1={9}
+                x2={11}
+                y2={9}
+                stroke="rgb(var(--foreground))"
+                strokeWidth={1.5}
+                opacity={0.6}
+              />
             </g>
-            <circle cx={18} cy={332} r={7} fill="rgb(var(--accent-strong))" />
             <circle
-              cx={1422}
-              cy={198}
+              cx={70}
+              cy={336}
+              r={7}
+              fill="rgb(var(--accent-strong))"
+              className="sm:hidden"
+            />
+            <circle
+              cx={1370}
+              cy={192}
               r={7}
               fill="rgb(var(--background))"
               stroke="rgb(var(--accent-strong))"
               strokeWidth={3}
+              className="sm:hidden"
             />
           </motion.svg>
+          {/*
+            Preserved band-anchored Berlin marker (mobile) — kept in case we
+            revert the in-flow origin/destination strip below.
+          <div className="absolute left-[95.1%] top-[45.7%] hidden sm:block">
+            <div className="flex -translate-x-[85%] -translate-y-1/2 items-center gap-1.5">
+              <span className="whitespace-nowrap text-[11px] font-medium text-muted-foreground">
+                Berlin
+              </span>
+              <svg viewBox="0 0 64 48" className="block w-10 shrink-0">
+                <rect
+                  x="2"
+                  y="4"
+                  width="60"
+                  height="7"
+                  fill="rgb(var(--foreground))"
+                />
+                <rect
+                  x="5"
+                  y="11"
+                  width="54"
+                  height="33"
+                  fill="rgb(var(--background))"
+                  stroke="rgb(var(--foreground))"
+                  strokeWidth={3}
+                />
+                <rect
+                  x="21"
+                  y="26"
+                  width="22"
+                  height="18"
+                  fill="rgb(var(--background))"
+                  stroke="rgb(var(--foreground))"
+                  strokeWidth={2}
+                />
+                <line
+                  x1={23}
+                  y1={32}
+                  x2={41}
+                  y2={32}
+                  stroke="rgb(var(--foreground))"
+                  strokeWidth={1.5}
+                  opacity={0.6}
+                />
+                <line
+                  x1={23}
+                  y1={38}
+                  x2={41}
+                  y2={38}
+                  stroke="rgb(var(--foreground))"
+                  strokeWidth={1.5}
+                  opacity={0.6}
+                />
+              </svg>
+            </div>
+          </div>
+          */}
           </div>
           <motion.svg
             style={reduce ? undefined : { y: nearGround }}
@@ -248,7 +454,7 @@ export function Hero() {
           </motion.svg>
         </div>
 
-        <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-start justify-center px-6 pt-24 text-left">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1100px] flex-1 flex-col items-start justify-start px-6 pt-24 text-left">
           <motion.div
             variants={container}
             initial="hidden"
@@ -257,7 +463,7 @@ export function Hero() {
           >
             <motion.p
               variants={rise}
-              className="inline-flex items-center gap-2 rounded border border-border bg-background px-3 py-1.5 text-[13px] font-semibold text-accent-strong"
+              className="mt-[50px] inline-flex items-center gap-2 rounded border border-border bg-background px-3 py-1.5 text-[13px] font-semibold text-accent-strong sm:mt-[30px]"
             >
               <span
                 aria-hidden="true"
@@ -305,18 +511,99 @@ export function Hero() {
                 <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
               </Link>
             </motion.div>
-
-            <motion.p
-              variants={rise}
-              className="mt-4 text-[13.5px] text-muted-foreground"
-            >
-              Scroll to follow the route — no contract needed to start.
-            </motion.p>
+            <div aria-hidden="true" className="mt-4 hidden w-full items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <svg viewBox="0 0 56 48" className="block w-9 shrink-0">
+                  <path
+                    d="M4 16 L52 16 L46 30 L10 30 Z"
+                    fill="rgb(var(--accent-strong))"
+                  />
+                  <rect
+                    x="8"
+                    y="16"
+                    width="40"
+                    height="28"
+                    fill="rgb(var(--background))"
+                    stroke="rgb(var(--foreground))"
+                    strokeWidth={3}
+                  />
+                  <rect
+                    x="34"
+                    y="24"
+                    width="10"
+                    height="8"
+                    fill="rgb(var(--accent))"
+                    fillOpacity={0.55}
+                  />
+                  <rect
+                    x="14"
+                    y="30"
+                    width="10"
+                    height="14"
+                    fill="rgb(var(--foreground))"
+                  />
+                </svg>
+                <span className="whitespace-nowrap text-[11px] font-medium text-muted-foreground">
+                  Amsterdam
+                </span>
+              </div>
+              <span className="h-0 flex-1 border-t-2 border-dashed border-border" />
+              <div className="flex items-center gap-1.5">
+                <span className="whitespace-nowrap text-[11px] font-medium text-muted-foreground">
+                  Berlin
+                </span>
+                <svg viewBox="0 0 64 48" className="block w-10 shrink-0">
+                  <rect
+                    x="2"
+                    y="4"
+                    width="60"
+                    height="7"
+                    fill="rgb(var(--foreground))"
+                  />
+                  <rect
+                    x="5"
+                    y="11"
+                    width="54"
+                    height="33"
+                    fill="rgb(var(--background))"
+                    stroke="rgb(var(--foreground))"
+                    strokeWidth={3}
+                  />
+                  <rect
+                    x="21"
+                    y="26"
+                    width="22"
+                    height="18"
+                    fill="rgb(var(--background))"
+                    stroke="rgb(var(--foreground))"
+                    strokeWidth={2}
+                  />
+                  <line
+                    x1={23}
+                    y1={32}
+                    x2={41}
+                    y2={32}
+                    stroke="rgb(var(--foreground))"
+                    strokeWidth={1.5}
+                    opacity={0.6}
+                  />
+                  <line
+                    x1={23}
+                    y1={38}
+                    x2={41}
+                    y2={38}
+                    stroke="rgb(var(--foreground))"
+                    strokeWidth={1.5}
+                    opacity={0.6}
+                  />
+                </svg>
+              </div>
+            </div>
           </motion.div>
         </div>
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-20"
+          className="pointer-events-none absolute inset-0 z-20 sm:hidden"
         >
           <div ref={vanRef} className="invisible absolute left-0 top-0">
             <svg
