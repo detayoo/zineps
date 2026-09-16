@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
