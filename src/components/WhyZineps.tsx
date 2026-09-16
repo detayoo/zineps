@@ -83,11 +83,11 @@ export function WhyZineps() {
           className="mt-12 grid grid-cols-4 divide-x divide-border rounded border border-border lg:grid-cols-2 lg:divide-x-0 sm:grid-cols-1"
         >
           {stats.map((stat) => (
-            <div key={stat.label} className="flex flex-col px-6 py-6">
+            <div key={stat.label} className="group flex flex-col px-6 py-6">
               <dt className="order-2 mt-1 text-[13.5px] text-muted-foreground">
                 {stat.label}
               </dt>
-              <dd className="order-1 text-[30px] font-semibold tracking-[-0.01em] text-foreground">
+              <dd className="order-1 origin-bottom-left text-[30px] font-semibold tracking-[-0.01em] tabular-nums text-foreground transition-transform duration-300 motion-safe:group-hover:-rotate-2">
                 {stat.value}
               </dd>
             </div>
