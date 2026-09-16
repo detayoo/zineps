@@ -30,7 +30,7 @@ const WHEEL_RADIUS = 14;
  *  Both ends sit inside the frame (clear of the viewport edges) so the parked
  *  van is never half-clipped. */
 const ROUTE_D =
-  "M70 336 C 280 262, 520 370, 760 270 C 1000 170, 1200 250, 1370 192";
+  "M100 336 C 300 262, 520 370, 760 270 C 1000 170, 1200 250, 1370 192";
 
 /**
  * Drive the van along the route path, in screen pixels. The route SVG
@@ -262,10 +262,11 @@ export function Hero() {
             />
             </g>
             <text
-              x={112}
-              y={330}
+              x={100}
+              y={375}
               fontSize={22}
               fill="rgb(var(--muted-foreground))"
+              textAnchor="middle"
               className="sm:hidden"
             >
               Amsterdam
@@ -368,7 +369,7 @@ export function Hero() {
               />
             </g>
             <circle
-              cx={70}
+              cx={100}
               cy={336}
               r={7}
               fill="rgb(var(--accent-strong))"
